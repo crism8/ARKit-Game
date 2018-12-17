@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  ARKitGame
+
+  Created by Cristian Makarski on 01/12/2018.
+  Copyright © 2018 Cristrian Makarski. All rights reserved.
+*/
+
+
+"ButtonTrex" = "Dodaj Trexa ";
+"ButtonShip" = "Dodaj Statek ";
+
