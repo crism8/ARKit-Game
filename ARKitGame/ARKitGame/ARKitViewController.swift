@@ -22,6 +22,8 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
     let efectsArray = ["art.scnassets/Smoke.scnp", "art.scnassets/Bokeh.scnp", "art.scnassets/Fire.scnp", "art.scnassets/Reactor.scnp", "art.scnassets/Confetti.scnp"]
     var power: Float = 50
     var Target: SCNNode?
+    var scoreLabel: UILabel = UILabel()
+    var score: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
       //  self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         self.makeTrexButton()
         self.addGunSight()
+        self.addScoreCounter()
     }
     
     func addGunSight() {
@@ -38,12 +41,20 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         let gunSight = UIImageView(image: image)
         self.view.addSubview(gunSight)
         gunSight.translatesAutoresizingMaskIntoConstraints = false
-        //let bottomButtonConstraint = playButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-
         gunSight.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         gunSight.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
     }
+    func addScoreCounter() {
+        self.scoreLabel.text = String(self.score)
+        self.scoreLabel.font = UIFont.systemFont(ofSize: 20)
+        self.scoreLabel.textAlignment = .center
+        self.view.addSubview(self.scoreLabel)
+        self.scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.scoreLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -115,14 +126,12 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         
         //let trexScene =  SCNScene(named: "art.scnassets/egg.scn")
        // let trexNode = (trexScene?.rootNode.childNode(withName: "egg", recursively: false))!
-        let trexScene =  SCNScene(named: "art.scnassets/No_Eyed_Dragon.scn")
-        let trexNode = (trexScene?.rootNode.childNode(withName: "No_Eyed_Dragon", recursively: false))!
+       // let trexScene =  SCNScene(named: "art.scnassets/No_Eyed_Dragon.scn")
+       // let trexNode = (trexScene?.rootNode.childNode(withName: "No_Eyed_Dragon", recursively: false))!
        // let trexScene =  SCNScene(named: "art.scnassets/ship.scn")
       //  let trexNode = (trexScene?.rootNode.childNode(withName: "ship", recursively: false))!
-        //let trexScene =  SCNScene(named: "art.scnassets/butterfly_dragon.scn")
-        // let trexNode = trexScene?.rootNode.childNode(withName: "body", recursively: false)
-        // let trexScene =  SCNScene(named: "art.scnassets/dragonglare.scn")
-        //  let trexNode = trexScene?.rootNode.childNode(withName: "dragon", recursively: false)
+         let trexScene =  SCNScene(named: "art.scnassets/dragonglare.scn")
+         let trexNode = (trexScene?.rootNode.childNode(withName: "dragon", recursively: false))!
         trexNode.position = SCNVector3(x,y,z)
         trexNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: trexNode, options: nil))
         trexNode.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue
@@ -148,7 +157,9 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         confettiNode.position = contact.contactPoint
         self.sceneView.scene.rootNode.addChildNode(confettiNode)
         Target?.removeFromParentNode()
-        
+        self.score =  self.score+1
+        self.scoreLabel.text = String(self.score)
+        self.addNoEyedDragon(x: Float.random(in: -5.0 ... 5.0), y: Float.random(in: -5.0 ... 5.0), z: Float.random(in: -5.0 ... 5.0))
     }
 
     // MARK: - ARSCNViewDelegate
