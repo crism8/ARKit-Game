@@ -107,12 +107,9 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         view.addSubview(playButton)
         
         playButton.translatesAutoresizingMaskIntoConstraints = false
-        let bottomButtonConstraint = playButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        playButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         let margins = view.layoutMarginsGuide
-        let leadingButtonConstraint = playButton.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
-        
-        bottomButtonConstraint.isActive = true
-        leadingButtonConstraint.isActive = true
+        playButton.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
     }
     
     @objc func trexButtonClicked(_ sender:UIButton!) {
