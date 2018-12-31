@@ -98,7 +98,7 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
     
     func makeTrexButton() {
         let playButton = UIButton(type: .roundedRect)
-        playButton.setTitle(NSLocalizedString("ButtonTrex", comment: "Button"), for: .normal)
+        playButton.setTitle(NSLocalizedString("DragonButton", comment: "Button"), for: .normal)
         playButton.backgroundColor = .green
         playButton.addTarget(self, action: #selector(self.trexButtonClicked(_:)), for: .touchUpInside)
         
@@ -123,12 +123,12 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         
         //let trexScene =  SCNScene(named: "art.scnassets/egg.scn")
        // let trexNode = (trexScene?.rootNode.childNode(withName: "egg", recursively: false))!
-       // let trexScene =  SCNScene(named: "art.scnassets/No_Eyed_Dragon.scn")
-       // let trexNode = (trexScene?.rootNode.childNode(withName: "No_Eyed_Dragon", recursively: false))!
+        let trexScene =  SCNScene(named: "art.scnassets/No_Eyed_Dragon.scn")
+        let trexNode = (trexScene?.rootNode.childNode(withName: "No_Eyed_Dragon", recursively: false))!
        // let trexScene =  SCNScene(named: "art.scnassets/ship.scn")
       //  let trexNode = (trexScene?.rootNode.childNode(withName: "ship", recursively: false))!
-         let trexScene =  SCNScene(named: "art.scnassets/dragonglare.scn")
-         let trexNode = (trexScene?.rootNode.childNode(withName: "dragon", recursively: false))!
+       //  let trexScene =  SCNScene(named: "art.scnassets/dragonglare.scn")
+       //  let trexNode = (trexScene?.rootNode.childNode(withName: "dragon", recursively: false))!
         trexNode.position = SCNVector3(x,y,z)
         trexNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: trexNode, options: nil))
         trexNode.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue

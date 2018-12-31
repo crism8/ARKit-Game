@@ -7,7 +7,9 @@
 */
 
 
-"ButtonTrex" = "Dodaj Trexa ";
-"ButtonShip" = "Dodaj Statek ";
-"PlayButton" = "Graj";
+"DragonButton" = "Show Dragons";
+"playButton" = "Play";
+"optionsButton" = "Options";
+"leaderboardButton" = "Leaderboard";
+
 
