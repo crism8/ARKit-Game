@@ -11,7 +11,6 @@ import UIKit
 class MainMenuViewController: UIViewController {
     
     let buttonsNamesArray = ["playButton", "optionsButton", "leaderboardButton"]
-    var buttonsArray:[UIButton] = []
     var playButton = UIButton()
     var optionsButton = UIButton()
     var leaderboardButton = UIButton()
@@ -24,12 +23,13 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
         self.addBackground()
         var buttonsDict:[String: UIButton] = ["playButton": self.playButton, "optionsButton": self.optionsButton, "leaderboardButton": self.leaderboardButton ]
+        var buttonsArray:[UIButton] = []
         for buttonName in buttonsNamesArray {
             self.prapareMenuButton(title: buttonName, menuButton: buttonsDict[buttonName]!)
-            self.buttonsArray.append(buttonsDict[buttonName]!)
+            buttonsArray.append(buttonsDict[buttonName]!)
         }
         self.addTargetsForButtons()
-        self.addStackView(butt: self.buttonsArray)
+        self.addStackView(butt: buttonsArray)
     }
     
     func addStackView(butt: [UIButton])  {
@@ -52,7 +52,6 @@ class MainMenuViewController: UIViewController {
         background.translatesAutoresizingMaskIntoConstraints = false
         background.pinEdges(to: self.view)
         background.contentMode = .scaleAspectFill
-
     }
     
     func prapareMenuButton(title: String, menuButton: UIButton) {
@@ -91,6 +90,9 @@ class MainMenuViewController: UIViewController {
     
     @objc func optionsButtonClicked(_ sender:UIButton!) {
         print("options Button Clicked")
+        let newViewController = OptionsViewController()
+        //self.navigationController = UINavigationController()
+        self.navigationController?.pushViewController(newViewController, animated: true)
         
     }
     

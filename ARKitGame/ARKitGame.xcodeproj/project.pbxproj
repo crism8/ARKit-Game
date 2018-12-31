@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F301FFD221D9CB480020C1F6 /* UIView+PinEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301FFD121D9CB480020C1F6 /* UIView+PinEdges.swift */; };
+		F301FFD421DAA0B00020C1F6 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */; };
 		F3205A4A21B2121C0021336A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F3205A4921B2121C0021336A /* Localizable.strings */; };
 		F3692E022187C3AD000B0C9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3692E012187C3AD000B0C9F /* AppDelegate.swift */; };
 		F3692E042187C3AD000B0C9F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F3692E032187C3AD000B0C9F /* art.scnassets */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		F301FFD121D9CB480020C1F6 /* UIView+PinEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PinEdges.swift"; sourceTree = "<group>"; };
+		F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		F3205A4921B2121C0021336A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F3692DFE2187C3AD000B0C9F /* ARKitGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3692E012187C3AD000B0C9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				F3692E0C2187C3AE000B0C9F /* LaunchScreen.storyboard */,
 				F3692E072187C3AD000B0C9F /* Main.storyboard */,
 				F3CF3A8721D719F600929C8B /* MainMenuViewController.swift */,
+				F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */,
 			);
 			path = ARKitGame;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				F3692E062187C3AD000B0C9F /* ARKitViewController.swift in Sources */,
 				F3692E022187C3AD000B0C9F /* AppDelegate.swift in Sources */,
 				F301FFD221D9CB480020C1F6 /* UIView+PinEdges.swift in Sources */,
+				F301FFD421DAA0B00020C1F6 /* OptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

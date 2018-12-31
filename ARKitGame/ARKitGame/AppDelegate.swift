@@ -13,14 +13,27 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var navViewController: UINavigationController?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         let mainViewController = MainMenuViewController()
-        window?.rootViewController = mainViewController
+        self.navViewController = UINavigationController(rootViewController: mainViewController)
+        window?.rootViewController = self.navViewController
         window?.makeKeyAndVisible()
         return true
+        
+        /*
+         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+         // Override point for customization after application launch.
+         frstVwCntlr = [[firstViewController alloc] initWithNibName:@"firstViewController" bundle:nil];
+         self.navController = [[UINavigationController alloc] initWithRootViewController:self.frstVwCntlr];
+         self.window.rootViewController = self.navController;
+         self.window.backgroundColor = [UIColor whiteColor];
+         [self.window makeKeyAndVisible];
+         return YES;
+         */
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
