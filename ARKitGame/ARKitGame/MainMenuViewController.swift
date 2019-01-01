@@ -91,7 +91,6 @@ class MainMenuViewController: UIViewController {
     @objc func optionsButtonClicked(_ sender:UIButton!) {
         print("options Button Clicked")
         let newViewController = OptionsViewController()
-        //self.navigationController = UINavigationController()
         self.navigationController?.pushViewController(newViewController, animated: true)
         
     }

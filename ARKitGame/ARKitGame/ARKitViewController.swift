@@ -17,7 +17,7 @@ enum BitMaskCategory: Int {
 
 class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
 
-    @IBOutlet weak var sceneView: ARSCNView!
+    var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     let efectsArray = ["art.scnassets/Smoke.scnp", "art.scnassets/Bokeh.scnp", "art.scnassets/Fire.scnp", "art.scnassets/Reactor.scnp", "art.scnassets/Confetti.scnp"]
     var power: Float = 50
@@ -28,12 +28,20 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.sceneView.delegate = self
-        self.sceneView.showsStatistics = true
-      //  self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        self.addSceneView()
         self.makeTrexButton()
         self.addGunSight()
         self.addScoreCounter()
+    }
+    
+    func addSceneView() {
+        self.sceneView = ARSCNView()
+        self.view.addSubview(self.sceneView)
+        self.sceneView.translatesAutoresizingMaskIntoConstraints = false
+        self.sceneView.pinEdges(to: self.view)
+        self.sceneView.delegate = self
+        //self.sceneView.showsStatistics = true
+        //self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
     }
     
     func addGunSight() {
@@ -154,9 +162,14 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         confettiNode.position = contact.contactPoint
         self.sceneView.scene.rootNode.addChildNode(confettiNode)
         Target?.removeFromParentNode()
-        self.score =  self.score+1
-        self.scoreLabel.text = String(self.score)
         self.addNoEyedDragon(x: Float.random(in: -5.0 ... 5.0), y: Float.random(in: -5.0 ... 5.0), z: Float.random(in: -5.0 ... 5.0))
+    }
+    
+    func updateScore() {
+        DispatchQueue.main.async {
+            self.score =  self.score+1
+            self.scoreLabel.text = String(self.score)
+        }
     }
 
     // MARK: - ARSCNViewDelegate
