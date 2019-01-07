@@ -163,6 +163,7 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         self.sceneView.scene.rootNode.addChildNode(confettiNode)
         Target?.removeFromParentNode()
         self.addNoEyedDragon(x: Float.random(in: -5.0 ... 5.0), y: Float.random(in: -5.0 ... 5.0), z: Float.random(in: -5.0 ... 5.0))
+        self.updateScore()
     }
     
     func updateScore() {

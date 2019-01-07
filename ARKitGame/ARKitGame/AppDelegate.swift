@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import MainMenuViewController
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,18 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.navViewController = UINavigationController(rootViewController: mainViewController)
         window?.rootViewController = self.navViewController
         window?.makeKeyAndVisible()
+        FirebaseApp.configure()
         return true
-        
-        /*
-         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-         // Override point for customization after application launch.
-         frstVwCntlr = [[firstViewController alloc] initWithNibName:@"firstViewController" bundle:nil];
-         self.navController = [[UINavigationController alloc] initWithRootViewController:self.frstVwCntlr];
-         self.window.rootViewController = self.navController;
-         self.window.backgroundColor = [UIColor whiteColor];
-         [self.window makeKeyAndVisible];
-         return YES;
-         */
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

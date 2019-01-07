@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E501CC488C40B8A66DC6B73 /* Pods_ARKitGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1096DE03FC014C728D4716 /* Pods_ARKitGame.framework */; };
 		F301FFD221D9CB480020C1F6 /* UIView+PinEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301FFD121D9CB480020C1F6 /* UIView+PinEdges.swift */; };
 		F301FFD421DAA0B00020C1F6 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */; };
 		F3205A4A21B2121C0021336A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F3205A4921B2121C0021336A /* Localizable.strings */; };
+		F3570C4021E40E1000EEDE9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */; };
 		F3692E022187C3AD000B0C9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3692E012187C3AD000B0C9F /* AppDelegate.swift */; };
 		F3692E042187C3AD000B0C9F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F3692E032187C3AD000B0C9F /* art.scnassets */; };
 		F3692E062187C3AD000B0C9F /* ARKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3692E052187C3AD000B0C9F /* ARKitViewController.swift */; };
@@ -19,9 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55445C910844BD3DCB105C1D /* Pods-ARKitGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARKitGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARKitGame/Pods-ARKitGame.release.xcconfig"; sourceTree = "<group>"; };
+		CE1096DE03FC014C728D4716 /* Pods_ARKitGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARKitGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF9325FF475E84E9B0D85945 /* Pods-ARKitGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARKitGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARKitGame/Pods-ARKitGame.debug.xcconfig"; sourceTree = "<group>"; };
 		F301FFD121D9CB480020C1F6 /* UIView+PinEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PinEdges.swift"; sourceTree = "<group>"; };
 		F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		F3205A4921B2121C0021336A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F3692DFE2187C3AD000B0C9F /* ARKitGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3692E012187C3AD000B0C9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3692E032187C3AD000B0C9F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -37,12 +43,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E501CC488C40B8A66DC6B73 /* Pods_ARKitGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C79EBCA5C494A00E58D97B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE1096DE03FC014C728D4716 /* Pods_ARKitGame.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A98AA824AFBEFFEE23BEC3D1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF9325FF475E84E9B0D85945 /* Pods-ARKitGame.debug.xcconfig */,
+				55445C910844BD3DCB105C1D /* Pods-ARKitGame.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F301FFD021D9CA950020C1F6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +80,8 @@
 			children = (
 				F3692E002187C3AD000B0C9F /* ARKitGame */,
 				F3692DFF2187C3AD000B0C9F /* Products */,
+				A98AA824AFBEFFEE23BEC3D1 /* Pods */,
+				8C79EBCA5C494A00E58D97B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +98,7 @@
 			children = (
 				F301FFD021D9CA950020C1F6 /* Extensions */,
 				F3692E0F2187C3AE000B0C9F /* Info.plist */,
+				F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */,
 				F3692E032187C3AD000B0C9F /* art.scnassets */,
 				F3205A4921B2121C0021336A /* Localizable.strings */,
 				F3692E012187C3AD000B0C9F /* AppDelegate.swift */,
@@ -91,9 +118,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3692E122187C3AE000B0C9F /* Build configuration list for PBXNativeTarget "ARKitGame" */;
 			buildPhases = (
+				9AA3553CE838216431A76BC9 /* [CP] Check Pods Manifest.lock */,
 				F3692DFA2187C3AD000B0C9F /* Sources */,
 				F3692DFB2187C3AD000B0C9F /* Frameworks */,
 				F3692DFC2187C3AD000B0C9F /* Resources */,
+				4C977C7FF248D6F97A389E24 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,12 +173,64 @@
 			files = (
 				F3205A4A21B2121C0021336A /* Localizable.strings in Resources */,
 				F3692E042187C3AD000B0C9F /* art.scnassets in Resources */,
+				F3570C4021E40E1000EEDE9D /* GoogleService-Info.plist in Resources */,
 				F3692E0E2187C3AE000B0C9F /* LaunchScreen.storyboard in Resources */,
 				F3692E0B2187C3AE000B0C9F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4C977C7FF248D6F97A389E24 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ARKitGame/Pods-ARKitGame-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARKitGame/Pods-ARKitGame-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AA3553CE838216431A76BC9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARKitGame-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F3692DFA2187C3AD000B0C9F /* Sources */ = {
@@ -296,6 +377,7 @@
 		};
 		F3692E132187C3AE000B0C9F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF9325FF475E84E9B0D85945 /* Pods-ARKitGame.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -315,6 +397,7 @@
 		};
 		F3692E142187C3AE000B0C9F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55445C910844BD3DCB105C1D /* Pods-ARKitGame.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
