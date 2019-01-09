@@ -50,7 +50,7 @@ class MainMenuViewController: UIViewController {
         let background = UIImageView(image: image)
         self.view.addSubview(background)
         background.translatesAutoresizingMaskIntoConstraints = false
-        background.pinEdges(to: self.view)
+        background.pinAllEdges(to: self.view)
         background.contentMode = .scaleAspectFill
     }
     

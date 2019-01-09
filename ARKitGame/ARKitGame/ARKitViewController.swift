@@ -38,7 +38,7 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         self.sceneView = ARSCNView()
         self.view.addSubview(self.sceneView)
         self.sceneView.translatesAutoresizingMaskIntoConstraints = false
-        self.sceneView.pinEdges(to: self.view)
+        self.sceneView.pinAllEdges(to: self.view)
         self.sceneView.delegate = self
         //self.sceneView.showsStatistics = true
         //self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
