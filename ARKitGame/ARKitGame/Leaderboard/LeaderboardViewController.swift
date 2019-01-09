@@ -26,7 +26,9 @@ class LeaderboardViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.cellIdentifier()) as! LeaderboardTableViewCell
+        cell.playerPosition = String(indexPath.row)
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
