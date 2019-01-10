@@ -83,7 +83,7 @@ class MainMenuViewController: UIViewController {
     
     @objc func playButtonClicked(_ sender:UIButton!) {
         print("play Button Clicked")
-        let newViewController = ARKitViewController()
+        let newViewController = GameViewController()
         self.navigationController?.pushViewController(newViewController, animated: true)
         
     }

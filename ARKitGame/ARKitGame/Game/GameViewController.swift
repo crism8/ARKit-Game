@@ -15,12 +15,12 @@ enum BitMaskCategory: Int {
     case target = 3
 }
 
-class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
+class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
 
     var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     let efectsArray = ["art.scnassets/Smoke.scnp", "art.scnassets/Bokeh.scnp", "art.scnassets/Fire.scnp", "art.scnassets/Reactor.scnp", "art.scnassets/Confetti.scnp"]
-    var power: Float = 50
+    var power: Float = 25
     var Target: SCNNode?
     var scoreLabel: UILabel = UILabel()
     var score: Int = 0
@@ -92,7 +92,7 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         bullet.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         bullet.position = position
         let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: bullet, options: nil))
-        body.isAffectedByGravity = false
+        body.isAffectedByGravity = true
         bullet.physicsBody = body
         bullet.physicsBody?.applyForce(SCNVector3(orientation.x*power, orientation.y*power, orientation.z*power), asImpulse: true)
         bullet.physicsBody?.categoryBitMask = BitMaskCategory.bullet.rawValue
@@ -123,8 +123,8 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
     @objc func trexButtonClicked(_ sender:UIButton!) {
      print("sample Button Clicked")
         self.addNoEyedDragon(x: 5, y: 0, z: -10)
-        self.addNoEyedDragon(x: 0, y: 0, z: -10)
-        self.addNoEyedDragon(x: -5, y: 0, z: -10)
+      //  self.addNoEyedDragon(x: 0, y: 0, z: -10)
+      //  self.addNoEyedDragon(x: -5, y: 0, z: -10)
      }
     
     func addNoEyedDragon(x: Float, y: Float, z: Float) {
@@ -142,6 +142,9 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         trexNode.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue
         trexNode.physicsBody?.contactTestBitMask = BitMaskCategory.bullet.rawValue
         self.sceneView.scene.rootNode.addChildNode(trexNode)
+        let dragonAction = bezierPathMove()//rotation(time: 8)
+         //let dragonAction = animate()
+        trexNode.runAction(dragonAction)
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -189,8 +192,47 @@ class ARKitViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContac
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+    
+    func rotation(time: TimeInterval) -> SCNAction {
+       // guard let sceneView = sender.view as? ARSCNView else {return}
+       // guard let pointOfView = self.sceneView.pointOfView else {return}
+        let transform = self.sceneView.pointOfView!.transform
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        let position = orientation + location
+        let Rotation = SCNAction.rotate(by: CGFloat(360.degreesToRadians), around: position, duration: 1)//rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: time)
+       // let rr = SCNAction
+        let foreverRotation = SCNAction.repeatForever(Rotation)
+        return foreverRotation
+    }
+    
+    func animate() -> SCNAction {
+        //let moveIt = SCNAction.mov
+        let moveUp = SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1)
+        moveUp.timingMode = .easeInEaseOut;
+        let moveDown = SCNAction.moveBy(x: 0, y: -1, z: 0, duration: 1)
+        moveDown.timingMode = .easeInEaseOut;
+        let moveSequence = SCNAction.sequence([moveUp,moveDown])
+        let moveLoop = SCNAction.repeatForever(moveSequence)
+       return moveLoop
+    }
+    
+    func bezierPathMove() -> SCNAction {
+        let path1 = UIBezierPath(ovalIn: CGRect(x: 3, y: 1, width: 1, height: 0.5))//(roundedRect: CGRect(x: 1, y: 1, width: 2, height: 2), cornerRadius: 1)
+        let actionMaker = ActionMaker()
+        let moveAction = actionMaker.moveAlong(path: path1)
+        let repeatAction = SCNAction.repeatForever(moveAction)
+        return repeatAction
+    }
+
 }
+
+extension Int {
+    var degreesToRadians: Double { return Double(self) * .pi/180}
+}
+
 
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
     return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
 }
+

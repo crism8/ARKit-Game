@@ -40,30 +40,17 @@ class OptionsViewController: UIViewController {
         menuButton.layer.cornerRadius = 10
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(menuButton)
-        menuButton.pinAllEdges(to: self.view)
+       // menuButton.pinAllEdges(to: self.view)
         menuButton.addTarget(self, action: #selector(self.firebaseButtonClicked(_:)), for: .touchUpInside)
 
-       // menuButton.heightAnchor.constraint(equalToConstant: self.buttonsHeight).isActive = true
-       // menuButton.widthAnchor.constraint(equalToConstant: self.buttonsWidth).isActive = true
-        
-        //playButton.titleEdgeInsets = UIEdgeInsets(top: -10,left: -10,bottom: -10,right: -10)
-        // playButton.contentEdgeInsets = UIEdgeInsets(top: 5,left: 5,bottom: 5,right: 5)
-        
-        //   return menuButton
+        menuButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        menuButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+
     }
     
     @objc func firebaseButtonClicked(_ sender:UIButton!) {
         print("firebase Button Clicked")
         firebase.sendScore()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
