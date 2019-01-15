@@ -24,17 +24,32 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     var Target: SCNNode?
     var score: Int = 0
     let gameView = GameView()
+    var timer = Timer()
+    var gameTime = 60.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = gameView
         self.gameView.startButton.addTarget(self, action: #selector(self.startButtonClicked(_:)), for: .touchUpInside)
     }
+    
     @objc func startButtonClicked(_ sender:UIButton!) {
         print("start Button Clicked")
         let vector = self.calculateFirstDragonPosition()
         self.addNoEyedDragon(position: vector)
         self.gameView.startButton.removeFromSuperview()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+
+    }
+    
+    @objc func updateTimer() {
+          if (self.gameTime < 0.1) {
+            timer.invalidate()
+        //Send alert to indicate time's up.
+            } else {
+            self.gameTime -= 0.1
+            self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)//self.gameTime)self.gameTime
+           }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,15 +104,15 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     
     func calculateFirstDragonPosition() -> SCNVector3 {
         var position = self.calculatePlayerPosition()
-        position.z =  position.z - 3
+        position.z -= 3
         return position
     }
     
     func calculateDragonPosition() -> SCNVector3 {
         var position = self.calculatePlayerPosition()
-        position.z =  position.z - Float.random(in: 3.0 ... 5.0)
-        position.x =  position.x - Float.random(in: -5.0 ... 5.0)
-        position.y =  position.y - Float.random(in: -5.0 ... 5.0)
+        position.z -=  Float.random(in: 3.0 ... 5.0)
+        position.x -=  Float.random(in: -5.0 ... 5.0)
+        position.y -=  Float.random(in: -5.0 ... 5.0)
 
         return position
     }
@@ -157,7 +172,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     
     func updateScore() {
         DispatchQueue.main.async {
-            self.score =  self.score+1
+            self.score += 1
             self.gameView.scoreLabel.text = String(self.score)
         }
     }

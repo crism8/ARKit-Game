@@ -8,14 +8,17 @@
 
 import UIKit
 import ARKit
+
 //<div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
 class GameView: UIView {
+    
     var sceneView: ARSCNView!
     var gunSight: UIImageView!
     var scoreLabel: UILabel!
+    var timeLabel: UILabel!
     var startButton: UIButton!
     var pauseButton: UIButton!
-
 
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -24,6 +27,7 @@ class GameView: UIView {
         self.addScoreCounter()
         self.addStartButton()
         self.addPauseButton()
+        self.addTimeLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -99,6 +103,16 @@ class GameView: UIView {
         button.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
         button.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
         self.pauseButton = button
-
+    }
+    
+    func addTimeLabel() {
+        self.timeLabel = UILabel()
+        self.timeLabel.text = String(60)
+        self.timeLabel.font = UIFont.systemFont(ofSize: 40)
+        self.timeLabel.textAlignment = .center
+        self.addSubview(self.timeLabel)
+        self.timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.timeLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 5).isActive = true
+        self.timeLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
     }
 }
