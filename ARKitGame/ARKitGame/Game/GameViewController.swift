@@ -17,68 +17,44 @@ enum BitMaskCategory: Int {
 
 class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
 
-    var sceneView: ARSCNView!
+    //var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     let efectsArray = ["art.scnassets/Smoke.scnp", "art.scnassets/Bokeh.scnp", "art.scnassets/Fire.scnp", "art.scnassets/Reactor.scnp", "art.scnassets/Confetti.scnp"]
     var power: Float = 25
     var Target: SCNNode?
-    var scoreLabel: UILabel = UILabel()
     var score: Int = 0
+    let gameView = GameView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.addSceneView()
-        self.makeTrexButton()
-        self.addGunSight()
-        self.addScoreCounter()
+        self.view = gameView
+        self.gameView.startButton.addTarget(self, action: #selector(self.startButtonClicked(_:)), for: .touchUpInside)
     }
-    
-    func addSceneView() {
-        self.sceneView = ARSCNView()
-        self.view.addSubview(self.sceneView)
-        self.sceneView.translatesAutoresizingMaskIntoConstraints = false
-        self.sceneView.pinAllEdges(to: self.view)
-        self.sceneView.delegate = self
-        //self.sceneView.showsStatistics = true
-        //self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-    }
-    
-    func addGunSight() {
-        let image = UIImage(named: "plus")
-        let gunSight = UIImageView(image: image)
-        self.view.addSubview(gunSight)
-        gunSight.translatesAutoresizingMaskIntoConstraints = false
-        gunSight.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        gunSight.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-    }
-    func addScoreCounter() {
-        self.scoreLabel.text = String(self.score)
-        self.scoreLabel.font = UIFont.systemFont(ofSize: 20)
-        self.scoreLabel.textAlignment = .center
-        self.view.addSubview(self.scoreLabel)
-        self.scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.scoreLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+    @objc func startButtonClicked(_ sender:UIButton!) {
+        print("start Button Clicked")
+        let vector = self.calculateFirstDragonPosition()
+        self.addNoEyedDragon(position: vector)
+        self.gameView.startButton.removeFromSuperview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Run the view's session
-        self.sceneView.session.run(configuration)
-        self.sceneView.autoenablesDefaultLighting = false
+        self.prepareSceneView()
+    }
+    
+    func prepareSceneView() {
+        self.gameView.sceneView.delegate = self
+        self.gameView.sceneView.session.run(configuration)
+        self.gameView.sceneView.autoenablesDefaultLighting = false
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        self.sceneView.addGestureRecognizer(gestureRecognizer)
-        self.sceneView.scene.physicsWorld.contactDelegate = self
+        self.gameView.sceneView.addGestureRecognizer(gestureRecognizer)
+        self.gameView.sceneView.scene.physicsWorld.contactDelegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         // Pause the view's session
-        self.sceneView.session.pause()
+        self.gameView.sceneView.session.pause()
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -87,7 +63,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         let transform = pointOfView.transform
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-        let position = orientation + location
+        let position = self.calculatePlayerPosition()//orientation + location
         let bullet = SCNNode(geometry: SCNSphere(radius: 0.1))
         bullet.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         bullet.position = position
@@ -97,82 +73,92 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         bullet.physicsBody?.applyForce(SCNVector3(orientation.x*power, orientation.y*power, orientation.z*power), asImpulse: true)
         bullet.physicsBody?.categoryBitMask = BitMaskCategory.bullet.rawValue
         bullet.physicsBody?.contactTestBitMask = BitMaskCategory.target.rawValue
-        self.sceneView.scene.rootNode.addChildNode(bullet)
+        self.gameView.sceneView.scene.rootNode.addChildNode(bullet)
         bullet.runAction(
             SCNAction.sequence([SCNAction.wait(duration: 2.0),
                                 SCNAction.removeFromParentNode()])
         )
     }
     
-    func makeTrexButton() {
-        let playButton = UIButton(type: .roundedRect)
-        playButton.setTitle(NSLocalizedString("DragonButton", comment: "Button"), for: .normal)
-        playButton.backgroundColor = .green
-        playButton.addTarget(self, action: #selector(self.trexButtonClicked(_:)), for: .touchUpInside)
-        
-        playButton.titleEdgeInsets = UIEdgeInsets(top: -10,left: -10,bottom: -10,right: -10)
-        playButton.contentEdgeInsets = UIEdgeInsets(top: 5,left: 5,bottom: 5,right: 5)
-        view.addSubview(playButton)
-        
-        playButton.translatesAutoresizingMaskIntoConstraints = false
-        playButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        let margins = view.layoutMarginsGuide
-        playButton.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+    func calculatePlayerPosition() -> SCNVector3 {
+        let transform = self.gameView.sceneView.pointOfView!.transform
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        return orientation + location
     }
     
-    @objc func trexButtonClicked(_ sender:UIButton!) {
-     print("sample Button Clicked")
-        self.addNoEyedDragon(x: 5, y: 0, z: -10)
-      //  self.addNoEyedDragon(x: 0, y: 0, z: -10)
-      //  self.addNoEyedDragon(x: -5, y: 0, z: -10)
-     }
+    func calculateFirstDragonPosition() -> SCNVector3 {
+        var position = self.calculatePlayerPosition()
+        position.z =  position.z - 3
+        return position
+    }
     
-    func addNoEyedDragon(x: Float, y: Float, z: Float) {
-        
+    func calculateDragonPosition() -> SCNVector3 {
+        var position = self.calculatePlayerPosition()
+        position.z =  position.z - Float.random(in: 3.0 ... 5.0)
+        position.x =  position.x - Float.random(in: -5.0 ... 5.0)
+        position.y =  position.y - Float.random(in: -5.0 ... 5.0)
+
+        return position
+    }
+    
+    func addNoEyedDragon(position: SCNVector3) {
+        // let trexScene =  SCNScene(named: "art.scnassets/ship.scn")
+        //  let trexNode = (trexScene?.rootNode.childNode(withName: "ship", recursively: false))!
+        //  let trexScene =  SCNScene(named: "art.scnassets/dragonglare.scn")
+        //  let trexNode = (trexScene?.rootNode.childNode(withName: "dragon", recursively: false))!
         //let trexScene =  SCNScene(named: "art.scnassets/egg.scn")
        // let trexNode = (trexScene?.rootNode.childNode(withName: "egg", recursively: false))!
-        let trexScene =  SCNScene(named: "art.scnassets/No_Eyed_Dragon.scn")
-        let trexNode = (trexScene?.rootNode.childNode(withName: "No_Eyed_Dragon", recursively: false))!
-       // let trexScene =  SCNScene(named: "art.scnassets/ship.scn")
-      //  let trexNode = (trexScene?.rootNode.childNode(withName: "ship", recursively: false))!
-       //  let trexScene =  SCNScene(named: "art.scnassets/dragonglare.scn")
-       //  let trexNode = (trexScene?.rootNode.childNode(withName: "dragon", recursively: false))!
-        trexNode.position = SCNVector3(x,y,z)
-        trexNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: trexNode, options: nil))
-        trexNode.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue
-        trexNode.physicsBody?.contactTestBitMask = BitMaskCategory.bullet.rawValue
-        self.sceneView.scene.rootNode.addChildNode(trexNode)
-        let dragonAction = bezierPathMove()//rotation(time: 8)
+        let dragonScene =  SCNScene(named: "art.scnassets/No_Eyed_Dragon.scn")
+        let dragonNode = (dragonScene?.rootNode.childNode(withName: "No_Eyed_Dragon", recursively: false))!
+
+        dragonNode.position = position//SCNVector3(x,y,z)
+        dragonNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: dragonNode, options: nil))
+        dragonNode.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue
+        dragonNode.physicsBody?.contactTestBitMask = BitMaskCategory.bullet.rawValue
+        self.gameView.sceneView.scene.rootNode.addChildNode(dragonNode)
+       // let dragonAction = rotation(time: 8)
          //let dragonAction = animate()
-        trexNode.runAction(dragonAction)
+        //dragonNode.runAction(dragonAction)
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         let nodeA = contact.nodeA
         let nodeB = contact.nodeB
+        if (nodeA.physicsBody?.categoryBitMask == nodeB.physicsBody?.categoryBitMask) {
+            // edit animation
+            return
+        }
         if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.target.rawValue {
             self.Target = nodeA
         } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.target.rawValue {
             self.Target = nodeB
         }
         
-        let confetti = SCNParticleSystem(named: efectsArray[Int.random(in: 0 ... efectsArray.count-1)], inDirectory: nil)
-        confetti?.loops = false
-        confetti?.particleLifeSpan = 4
-        confetti?.emitterShape = SCNSphere(radius: 1)
-        let confettiNode = SCNNode()
-        confettiNode.addParticleSystem(confetti!)
-        confettiNode.position = contact.contactPoint
-        self.sceneView.scene.rootNode.addChildNode(confettiNode)
-        Target?.removeFromParentNode()
-        self.addNoEyedDragon(x: Float.random(in: -5.0 ... 5.0), y: Float.random(in: -5.0 ... 5.0), z: Float.random(in: -5.0 ... 5.0))
+        let deadEffectNode = self.makeDeadEffect(contact: contact)
+        self.gameView.sceneView.scene.rootNode.addChildNode(deadEffectNode)
+        self.Target?.removeFromParentNode()
+        DispatchQueue.main.async {
+            self.addNoEyedDragon(position: self.calculateDragonPosition())//(x: Float.random(in: -5.0 ... 5.0), y: Float.random(in: -5.0 ... 5.0), z: Float.random(in: -5.0 ... 5.0))
+        }
         self.updateScore()
+    }
+    
+    func makeDeadEffect(contact: SCNPhysicsContact) -> SCNNode {
+        let effect = SCNParticleSystem(named: efectsArray[Int.random(in: 0 ... efectsArray.count-1)], inDirectory: nil)
+        effect?.loops = false
+        effect?.particleLifeSpan = 4
+        effect?.emitterShape = SCNSphere(radius: 1)
+        let effectNode = SCNNode()
+        effectNode.addParticleSystem(effect!)
+        effectNode.position = contact.contactPoint
+        return effectNode
     }
     
     func updateScore() {
         DispatchQueue.main.async {
             self.score =  self.score+1
-            self.scoreLabel.text = String(self.score)
+            self.gameView.scoreLabel.text = String(self.score)
         }
     }
 
@@ -196,7 +182,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     func rotation(time: TimeInterval) -> SCNAction {
        // guard let sceneView = sender.view as? ARSCNView else {return}
        // guard let pointOfView = self.sceneView.pointOfView else {return}
-        let transform = self.sceneView.pointOfView!.transform
+        let transform = self.gameView.sceneView.pointOfView!.transform
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
         let position = orientation + location
@@ -216,15 +202,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         let moveLoop = SCNAction.repeatForever(moveSequence)
        return moveLoop
     }
-    
-    func bezierPathMove() -> SCNAction {
-        let path1 = UIBezierPath(ovalIn: CGRect(x: 3, y: 1, width: 1, height: 0.5))//(roundedRect: CGRect(x: 1, y: 1, width: 2, height: 2), cornerRadius: 1)
-        let actionMaker = ActionMaker()
-        let moveAction = actionMaker.moveAlong(path: path1)
-        let repeatAction = SCNAction.repeatForever(moveAction)
-        return repeatAction
-    }
-
 }
 
 extension Int {

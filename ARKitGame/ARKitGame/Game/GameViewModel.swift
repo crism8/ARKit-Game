@@ -10,9 +10,13 @@ import Foundation
 import UIKit
 //import SwiftIconFont
 
-class FeedListViewModel {
-    let score = Observable<Int>(value: 0)
-    let isLoading = Observable<Bool>(value: false)
-    let time = Observable<TimeInterval>(value: 30)
-    let effectPaths = Observable<[String]>(value: [])
+class GameViewModel {
+    let gameModel: GameModel
+    
+    init(gameModel: GameModel) {
+        //  super.init()
+        self.gameModel = gameModel
+
+    }
+
 }

@@ -25,4 +25,8 @@ extension UIView {
         topAnchor.constraint(equalTo: other.topAnchor).isActive = true
         bottomAnchor.constraint(equalTo: other.bottomAnchor).isActive = true
     }
+    func centerXY(to other: UIView) {
+        centerXAnchor.constraint(equalTo: other.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: other.centerYAnchor).isActive = true
+    }
 }
