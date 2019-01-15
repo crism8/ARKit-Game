@@ -84,7 +84,7 @@ class MainMenuViewController: UIViewController {
     @objc func playButtonClicked(_ sender:UIButton!) {
         print("play Button Clicked")
         let newViewController = GameViewController()
-        self.navigationController?.pushViewController(newViewController, animated: true)
+        self.navigationController?.present(newViewController, animated: true)
         
     }
     
@@ -92,12 +92,10 @@ class MainMenuViewController: UIViewController {
         print("options Button Clicked")
         let newViewController = OptionsViewController()
         self.navigationController?.pushViewController(newViewController, animated: true)
-        
     }
     
     @objc func leaderboardButtonClicked(_ sender:UIButton!) {
         print("leaderboard Button Clicked")
-        
     }
 
 }

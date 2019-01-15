@@ -8,12 +8,14 @@
 
 import UIKit
 import ARKit
-
+//<div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 class GameView: UIView {
     var sceneView: ARSCNView!
     var gunSight: UIImageView!
     var scoreLabel: UILabel!
     var startButton: UIButton!
+    var pauseButton: UIButton!
+
 
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -21,6 +23,7 @@ class GameView: UIView {
         self.addGunSight()
         self.addScoreCounter()
         self.addStartButton()
+        self.addPauseButton()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,6 +50,15 @@ class GameView: UIView {
     
     
     func addScoreCounter() {
+        let scoreTextLabel = UILabel()
+        scoreTextLabel.text = NSLocalizedString("scoreLabel", comment: "MenuButton")
+        scoreTextLabel.font = UIFont.systemFont(ofSize: 20)
+        scoreTextLabel.textAlignment = .center
+        self.addSubview(scoreTextLabel)
+        scoreTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        scoreTextLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        scoreTextLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        
         self.scoreLabel = UILabel()
         self.scoreLabel.text = String(0)
         self.scoreLabel.font = UIFont.systemFont(ofSize: 20)
@@ -54,7 +66,7 @@ class GameView: UIView {
         self.addSubview(self.scoreLabel)
         self.scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         self.scoreLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.scoreLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        self.scoreLabel.topAnchor.constraint(equalTo: scoreTextLabel.bottomAnchor, constant: 5).isActive = true
     }
     
     func addStartButton() {
@@ -68,12 +80,25 @@ class GameView: UIView {
         startButton.layer.cornerRadius = 10
         self.addSubview(startButton)
         startButton.translatesAutoresizingMaskIntoConstraints = false
-        startButton.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        startButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        startButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        startButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         startButton.titleEdgeInsets = UIEdgeInsets(top: -10,left: -10,bottom: -10,right: -10)
         startButton.contentEdgeInsets = UIEdgeInsets(top: 5,left: 5,bottom: 5,right: 5)
         startButton.centerXY(to: self)
         self.startButton = startButton
-       // self.startButton.fron
         }
+    
+    func addPauseButton() {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named:"pause-button.png"), for: .normal)
+        button.setImage(UIImage(named:"pause-button-selected.png"), for: .highlighted)
+        self.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        button.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
+        button.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        self.pauseButton = button
+
+    }
 }
