@@ -41,8 +41,7 @@ class MainMenuViewController: UIViewController {
         self.view.addSubview(stackView)
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        stackView.centerXY(to: self.view)
     }
     
     func addBackground() {

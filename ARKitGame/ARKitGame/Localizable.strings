@@ -12,7 +12,9 @@
 "optionsButton" = "Options";
 "leaderboardButton" = "Leaderboard";
 "startButton" = "Start";
-"scoreLabel" = "Score";
+"resumeButton" = "Resume";
+"restartButton" = "Restart";
+"quitButton" = "Quit";
 
 
 

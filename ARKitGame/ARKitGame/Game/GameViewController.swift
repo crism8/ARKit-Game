@@ -24,32 +24,20 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     var Target: SCNNode?
     var score: Int = 0
     let gameView = GameView()
+    let pauseView = PausedGameView()
     var timer = Timer()
     var gameTime = 60.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = gameView
-        self.gameView.startButton.addTarget(self, action: #selector(self.startButtonClicked(_:)), for: .touchUpInside)
+        self.setupPauseView()
+        setTargetsForButtons()
     }
     
-    @objc func startButtonClicked(_ sender:UIButton!) {
-        print("start Button Clicked")
-        let vector = self.calculateFirstDragonPosition()
-        self.addNoEyedDragon(position: vector)
-        self.gameView.startButton.removeFromSuperview()
-        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
-
-    }
-    
-    @objc func updateTimer() {
-          if (self.gameTime < 0.1) {
-            timer.invalidate()
-        //Send alert to indicate time's up.
-            } else {
-            self.gameTime -= 0.1
-            self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)//self.gameTime)self.gameTime
-           }
+    func setupPauseView() {
+        self.view.addSubview(self.pauseView)
+        self.pauseView.pinAllEdges(to: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -217,6 +205,63 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         let moveLoop = SCNAction.repeatForever(moveSequence)
        return moveLoop
     }
+    
+    // Mark: Setting Targets
+    func setTargetsForButtons() {
+        self.gameView.startButton.addTarget(self, action: #selector(self.startButtonClicked(_:)), for: .touchUpInside)
+        self.gameView.pauseButton.addTarget(self, action: #selector(self.pauseButtonClicked(_:)), for: .touchUpInside)
+        self.pauseView.resumeButton.addTarget(self, action: #selector(self.resumeButtonClicked(_:)), for: .touchUpInside)
+        self.pauseView.restartButton.addTarget(self, action: #selector(self.restartButtonClicked(_:)), for: .touchUpInside)
+        self.pauseView.quitButton.addTarget(self, action: #selector(self.quitButtonClicked(_:)), for: .touchUpInside)
+
+
+    }
+    
+    @objc func startButtonClicked(_ sender:UIButton!) {
+        print("start Button Clicked")
+        let vector = self.calculateFirstDragonPosition()
+        self.addNoEyedDragon(position: vector)
+        self.gameView.startButton.removeFromSuperview()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func updateTimer() {
+        if (self.gameTime < 0.1) {
+            timer.invalidate()
+            //Send alert to indicate time's up.
+        } else {
+            self.gameTime -= 0.1
+            self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)
+        }
+    }
+    
+    @objc func pauseButtonClicked(_ sender:UIButton!) {
+        print("pause Button Clicked")
+        self.pauseView.isHidden = false
+        //self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+        timer.invalidate()
+    }
+    
+    @objc func resumeButtonClicked(_ sender:UIButton!) {
+        print("resume Button Clicked")
+        self.pauseView.isHidden = true
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func restartButtonClicked(_ sender:UIButton!) {
+        print("restart Button Clicked")
+        self.pauseView.isHidden = true
+        self.gameTime = 60
+        self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func quitButtonClicked(_ sender:UIButton!) {
+        print("quit Button Clicked")
+       self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension Int {
