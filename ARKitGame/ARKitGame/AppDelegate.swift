@@ -15,15 +15,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var navViewController: UINavigationController?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         let mainViewController = MainMenuViewController()
         self.navViewController = UINavigationController(rootViewController: mainViewController)
         window?.rootViewController = self.navViewController
+      //  self.navViewController?.navigationBar.backgroundColor = .clear
+       // self.navViewController?.navigationBar.barTintColor = .clear
+       // self.navViewController?.navigationBar.tintColor = .clear
+        self.navViewController?.navigationBar.shadowImage = UIImage()
+        self.navViewController?.navigationBar.isTranslucent = true
+        self.navViewController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+
         window?.makeKeyAndVisible()
         FirebaseApp.configure()
+
         return true
+    }
+    
+    
+    func setupNavigationController() {
+        self.navViewController?.navigationBar.backgroundColor = .clear
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -47,7 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 

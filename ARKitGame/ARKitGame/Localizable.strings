@@ -15,6 +15,7 @@
 "resumeButton" = "Resume";
 "restartButton" = "Restart";
 "quitButton" = "Quit";
+"playerNameLabel" = "Player Name:";
 
 
 

@@ -95,6 +95,8 @@ class MainMenuViewController: UIViewController {
     
     @objc func leaderboardButtonClicked(_ sender:UIButton!) {
         print("leaderboard Button Clicked")
+        let newViewController = PlayerNameViewController()
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
 
 }

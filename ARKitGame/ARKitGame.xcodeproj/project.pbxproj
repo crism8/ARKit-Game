@@ -18,6 +18,7 @@
 		F335D57721E6956B000B8ABF /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D57621E6956B000B8ABF /* GameViewModel.swift */; };
 		F335D57B21E6C78F000B8ABF /* ActionMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D57A21E6C78F000B8ABF /* ActionMaker.swift */; };
 		F33A2A3521E811A1001004E0 /* PausedGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33A2A3421E811A1001004E0 /* PausedGameView.swift */; };
+		F353685B21F15BF600AF68E2 /* PlayerNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353685A21F15BF600AF68E2 /* PlayerNameViewController.swift */; };
 		F3570C4021E40E1000EEDE9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */; };
 		F359AEB421EBF87C00EE96BD /* Dragon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359AEB321EBF87C00EE96BD /* Dragon.swift */; };
 		F359AEB621EBFD7A00EE96BD /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359AEB521EBFD7A00EE96BD /* GameModel.swift */; };
@@ -44,6 +45,7 @@
 		F335D57621E6956B000B8ABF /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		F335D57A21E6C78F000B8ABF /* ActionMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMaker.swift; sourceTree = "<group>"; };
 		F33A2A3421E811A1001004E0 /* PausedGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PausedGameView.swift; sourceTree = "<group>"; };
+		F353685A21F15BF600AF68E2 /* PlayerNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNameViewController.swift; sourceTree = "<group>"; };
 		F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F359AEB321EBF87C00EE96BD /* Dragon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragon.swift; sourceTree = "<group>"; };
 		F359AEB521EBFD7A00EE96BD /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				F3692E0A2187C3AE000B0C9F /* Assets.xcassets */,
 				F3692E0C2187C3AE000B0C9F /* LaunchScreen.storyboard */,
 				F335D57121E655B6000B8ABF /* FirebaseServices.swift */,
+				F353685A21F15BF600AF68E2 /* PlayerNameViewController.swift */,
 			);
 			path = ARKitGame;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				F33A2A3521E811A1001004E0 /* PausedGameView.swift in Sources */,
 				F359AEBA21EC023A00EE96BD /* GameView.swift in Sources */,
 				F3692E022187C3AD000B0C9F /* AppDelegate.swift in Sources */,
+				F353685B21F15BF600AF68E2 /* PlayerNameViewController.swift in Sources */,
 				F359AEB621EBFD7A00EE96BD /* GameModel.swift in Sources */,
 				F301FFD221D9CB480020C1F6 /* UIView+PinEdges.swift in Sources */,
 				F335D57521E68FCE000B8ABF /* Observable.swift in Sources */,
