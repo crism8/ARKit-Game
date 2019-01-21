@@ -88,7 +88,7 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     
     @objc func okButtonClicked(_ sender:UIButton!) {
         print("ok Button Clicked")
-        let newViewController = GameViewController()
+        let newViewController = GameViewController(playerName: self.playerName)
         self.navigationController?.present(newViewController, animated: true)
         self.navigationController?.popViewController(animated: false)
 

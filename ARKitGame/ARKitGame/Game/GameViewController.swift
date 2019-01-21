@@ -20,25 +20,49 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     //var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     let efectsArray = ["art.scnassets/Smoke.scnp", "art.scnassets/Bokeh.scnp", "art.scnassets/Fire.scnp", "art.scnassets/Reactor.scnp", "art.scnassets/Confetti.scnp"]
-    var power: Float = 25
+    var power: Float
     var Target: SCNNode?
     var score: Int = 0
+    var playerName: String
+
     let gameView = GameView()
     let pauseView = PausedGameView()
+    let endGameView = EndGameView()
+
     var timer = Timer()
     var gameTime = 60.0
+    
+    init(playerName: String) {
+        
+        self.power = 30
+        self.playerName = playerName
+        super.init(nibName: nil, bundle: nil)
+
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = gameView
         self.setupPauseView()
-        setTargetsForButtons()
+        self.setTargetsForButtons()
+        self.setupEndGameView()
     }
     
     func setupPauseView() {
         self.view.addSubview(self.pauseView)
         self.pauseView.pinAllEdges(to: self.view)
     }
+    
+    func setupEndGameView() {
+        self.view.addSubview(self.endGameView)
+        self.endGameView.pinAllEdges(to: self.view)
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -210,11 +234,13 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     func setTargetsForButtons() {
         self.gameView.startButton.addTarget(self, action: #selector(self.startButtonClicked(_:)), for: .touchUpInside)
         self.gameView.pauseButton.addTarget(self, action: #selector(self.pauseButtonClicked(_:)), for: .touchUpInside)
+        
         self.pauseView.resumeButton.addTarget(self, action: #selector(self.resumeButtonClicked(_:)), for: .touchUpInside)
         self.pauseView.restartButton.addTarget(self, action: #selector(self.restartButtonClicked(_:)), for: .touchUpInside)
         self.pauseView.quitButton.addTarget(self, action: #selector(self.quitButtonClicked(_:)), for: .touchUpInside)
-
-
+        
+        self.endGameView.restartButton.addTarget(self, action: #selector(self.restartButtonClicked(_:)), for: .touchUpInside)
+        self.endGameView.quitButton.addTarget(self, action: #selector(self.quitButtonClicked(_:)), for: .touchUpInside)
     }
     
     @objc func startButtonClicked(_ sender:UIButton!) {
@@ -229,6 +255,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     @objc func updateTimer() {
         if (self.gameTime < 0.1) {
             timer.invalidate()
+            self.endGameView.playerNameLabel.text = self.playerName
+            self.endGameView.scoreLabel.text = String(score)
+            self.endGameView.isHidden = false
             //Send alert to indicate time's up.
         } else {
             self.gameTime -= 0.1
