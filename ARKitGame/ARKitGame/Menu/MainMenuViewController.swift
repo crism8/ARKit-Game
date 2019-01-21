@@ -14,7 +14,7 @@ class MainMenuViewController: UIViewController {
     var playButton = UIButton()
     var optionsButton = UIButton()
     var leaderboardButton = UIButton()
-
+    let firebase = FirebaseServices.init()
     let buttonsWidth: CGFloat = 200.0
     let buttonsHeight: CGFloat = 50.0
     let topInset: CGFloat = 50.0
@@ -30,6 +30,7 @@ class MainMenuViewController: UIViewController {
         }
         self.addTargetsForButtons()
         self.addStackView(butt: buttonsArray)
+        firebase.getLeaderBoard()
     }
     
     func addStackView(butt: [UIButton])  {
@@ -82,9 +83,8 @@ class MainMenuViewController: UIViewController {
     
     @objc func playButtonClicked(_ sender:UIButton!) {
         print("play Button Clicked")
-        let newViewController = GameViewController()
-        self.navigationController?.present(newViewController, animated: true)
-        
+        let newViewController = PlayerNameViewController()//GameViewController()
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     @objc func optionsButtonClicked(_ sender:UIButton!) {
@@ -95,7 +95,7 @@ class MainMenuViewController: UIViewController {
     
     @objc func leaderboardButtonClicked(_ sender:UIButton!) {
         print("leaderboard Button Clicked")
-        let newViewController = PlayerNameViewController()
+        let newViewController = LeaderboardViewController(leaderboard: firebase.scoreData)
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
 

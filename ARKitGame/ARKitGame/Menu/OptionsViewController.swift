@@ -41,6 +41,8 @@ class OptionsViewController: UIViewController {
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(menuButton)
        // menuButton.pinAllEdges(to: self.view)
+        
+        menuButton.centerXY(to: self.view)
         menuButton.addTarget(self, action: #selector(self.firebaseButtonClicked(_:)), for: .touchUpInside)
 
         menuButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -51,6 +53,7 @@ class OptionsViewController: UIViewController {
     @objc func firebaseButtonClicked(_ sender:UIButton!) {
         print("firebase Button Clicked")
         firebase.sendScore()
+        firebase.getLeaderBoard()
     }
 
 }

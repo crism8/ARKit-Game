@@ -10,7 +10,10 @@ import UIKit
 
 class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     
+    let offsets: CGFloat = 10.0
     let playerNameLabel = UILabel()
+    let textField = UITextField()
+
     var playerName = "Dragon Slayer"
     
     override func viewDidLoad() {
@@ -19,6 +22,7 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
         self.addBackground()
         self.addPlayerNameLabel()
         self.addPlayerNameTextField()
+        self.addOkButton()
     }
     
 
@@ -46,23 +50,48 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func addPlayerNameTextField() {
-        let sampleTextField =  UITextField()
-        sampleTextField.placeholder = "Dragon Slayer"
-        sampleTextField.font = UIFont.systemFont(ofSize: 20)
-        sampleTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        sampleTextField.autocorrectionType = UITextAutocorrectionType.no
-        sampleTextField.keyboardType = UIKeyboardType.default
-        sampleTextField.returnKeyType = UIReturnKeyType.done
-        sampleTextField.clearButtonMode = UITextField.ViewMode.whileEditing
-        sampleTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        sampleTextField.delegate = self
-        self.view.addSubview(sampleTextField)
-       sampleTextField.translatesAutoresizingMaskIntoConstraints = false
+        self.textField.placeholder = "Dragon Slayer"
+        self.textField.font = UIFont.systemFont(ofSize: 20)
+        self.textField.borderStyle = UITextField.BorderStyle.roundedRect
+        self.textField.autocorrectionType = UITextAutocorrectionType.no
+        self.textField.keyboardType = UIKeyboardType.default
+        self.textField.returnKeyType = UIReturnKeyType.done
+        self.textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        self.textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        self.textField.delegate = self
+      // self.textField.backgroundColor = .clear
+        self.view.addSubview(self.textField)
+        self.textField.translatesAutoresizingMaskIntoConstraints = false
 
-        sampleTextField.topAnchor.constraint(equalTo: self.playerNameLabel.bottomAnchor).isActive = true
-        sampleTextField.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        sampleTextField.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        sampleTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.textField.topAnchor.constraint(equalTo: self.playerNameLabel.bottomAnchor).isActive = true
+        self.textField.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        self.textField.pinLeftRight(to: self.view, offset: self.offsets)
+        self.textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+    }
+    
+    func addOkButton() {
+        let button = UIButton(type: .custom)
+        button.setTitle(NSLocalizedString("OK", comment: "Button"), for: .normal)
+        //startButton.addTarget(self, action: #selector(self.trexButtonClicked(_:)), for: .touchUpInside)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.gray, for: .selected)
+        button.backgroundColor = UIColor(red: 0.55, green: 0.78, blue: 0.93, alpha: 1.0)
+        button.tintColor = UIColor(red: 0.25, green: 0.47, blue: 0.61, alpha: 1.0)
+        button.layer.cornerRadius = 10
+        self.view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.pinLeftRight(to: self.view, offset: self.offsets)
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 5).isActive = true
+        button.addTarget(self, action: #selector(self.okButtonClicked(_:)), for: .touchUpInside)
+    }
+    
+    @objc func okButtonClicked(_ sender:UIButton!) {
+        print("ok Button Clicked")
+        let newViewController = GameViewController()
+        self.navigationController?.present(newViewController, animated: true)
+        self.navigationController?.popViewController(animated: false)
+
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

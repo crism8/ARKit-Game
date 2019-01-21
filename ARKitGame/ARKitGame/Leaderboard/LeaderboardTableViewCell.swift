@@ -18,52 +18,65 @@ class LeaderboardTableViewCell: UITableViewCell {
         return String(describing: self)
     }
     
-    var positionTextView : UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    var positionLabel : UILabel = {
+        var l = UILabel()
+        l.font = UIFont.systemFont(ofSize: 20)
+        l.textAlignment = .center
+        l.translatesAutoresizingMaskIntoConstraints = false
+        return l
     }()
     
-    var nameTextView : UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    var nameLabel : UILabel = {
+        var l = UILabel()
+        l.font = UIFont.systemFont(ofSize: 20)
+        l.textAlignment = .center
+        l.translatesAutoresizingMaskIntoConstraints = false
+        return l
     }()
     
-    var scoreTextView : UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    var scoreLabel : UILabel = {
+        var l = UILabel()
+        l.font = UIFont.systemFont(ofSize: 20)
+        l.textAlignment = .center
+        l.translatesAutoresizingMaskIntoConstraints = false
+        return l
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.prepareContentView()
+    }
+    
+    func prepareContentView() {
+        self.contentView.addSubview(positionLabel)
+        self.contentView.addSubview(nameLabel)
+        self.contentView.addSubview(scoreLabel)
+        self.contentView.backgroundColor = .clear
+        self.backgroundColor = .clear
         
-        addSubview(positionTextView)
-        addSubview(nameTextView)
-        addSubview(scoreTextView)
+        self.positionLabel.pinTopBottom(to: self.contentView)
+        self.positionLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 15).isActive = true
+        self.nameLabel.pinTopBottom(to: self.contentView)
+        self.nameLabel.leftAnchor.constraint(equalTo: self.positionLabel.rightAnchor, constant: 10).isActive = true
         
-        self.positionTextView.pinEdgesToLeft(to: self)
-        
-        self.nameTextView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.nameTextView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        
-        self.scoreTextView.pinEdgesToRight(to: self)
+        self.scoreLabel.pinTopBottom(to: self.contentView)
+        self.scoreLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -15).isActive = true
 
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         if let position = playerPosition {
-            positionTextView.text = position
+            self.positionLabel.text = position
         }
         
         if let name = playerName {
-            nameTextView.text = name
+            self.nameLabel.text = name
         }
         
         if let score = playerScore {
-            scoreTextView.text = score
+            self.scoreLabel.text = score
         }
     }
     

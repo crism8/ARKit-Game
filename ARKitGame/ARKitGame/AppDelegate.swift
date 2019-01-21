@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navViewController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
         let mainViewController = MainMenuViewController()
         self.navViewController = UINavigationController(rootViewController: mainViewController)
@@ -28,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.navViewController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 
         window?.makeKeyAndVisible()
-        FirebaseApp.configure()
 
         return true
     }

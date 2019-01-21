@@ -25,6 +25,16 @@ extension UIView {
         topAnchor.constraint(equalTo: other.topAnchor).isActive = true
         bottomAnchor.constraint(equalTo: other.bottomAnchor).isActive = true
     }
+    func pinLeftRight(to other: UIView, offset: CGFloat) {
+        rightAnchor.constraint(equalTo: other.rightAnchor, constant: -offset).isActive = true
+        leftAnchor.constraint(equalTo: other.leftAnchor, constant: offset).isActive = true
+    }
+    
+    func pinTopBottom(to other: UIView) {
+        topAnchor.constraint(equalTo: other.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: other.bottomAnchor).isActive = true
+    }
+    
     func centerXY(to other: UIView) {
         centerXAnchor.constraint(equalTo: other.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: other.centerYAnchor).isActive = true
