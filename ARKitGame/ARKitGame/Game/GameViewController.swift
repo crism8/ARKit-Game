@@ -73,8 +73,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         self.gameView.sceneView.delegate = self
         self.gameView.sceneView.session.run(configuration)
         self.gameView.sceneView.autoenablesDefaultLighting = false
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        self.gameView.sceneView.addGestureRecognizer(gestureRecognizer)
         self.gameView.sceneView.scene.physicsWorld.contactDelegate = self
     }
     
@@ -239,6 +237,8 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     }
     
     @objc func startButtonClicked(_ sender:UIButton!) {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        self.gameView.sceneView.addGestureRecognizer(gestureRecognizer)
         let vector = self.calculateFirstDragonPosition()
         self.addNoEyedDragon(position: vector)
         self.gameView.startButton.removeFromSuperview()

@@ -9,13 +9,11 @@
 import UIKit
 
 class PlayerNameViewController: UIViewController, UITextFieldDelegate {
-    
-    let offsets: CGFloat = 10.0
+    static let defaultName = "Dragon Slayer"
+    static let offsets: CGFloat = 10.0
     let playerNameLabel = UILabel()
     let textField = UITextField()
 
-    var playerName = "Dragon Slayer"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,15 +40,18 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(self.playerNameLabel)
         self.playerNameLabel.translatesAutoresizingMaskIntoConstraints = false
 
+        self.layoutPlayerNameLabel()
+    }
+    
+    func layoutPlayerNameLabel() {
         self.playerNameLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25).isActive = true
         self.playerNameLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         self.playerNameLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
         self.playerNameLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-
     }
     
     func addPlayerNameTextField() {
-        self.textField.placeholder = "Dragon Slayer"
+        self.textField.placeholder = PlayerNameViewController.defaultName
         self.textField.font = UIFont.systemFont(ofSize: 20)
         self.textField.borderStyle = UITextField.BorderStyle.roundedRect
         self.textField.autocorrectionType = UITextAutocorrectionType.no
@@ -59,12 +60,15 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
         self.textField.clearButtonMode = UITextField.ViewMode.whileEditing
         self.textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         self.textField.delegate = self
+        self.layoutTextView()
+    }
+    
+    func layoutTextView() {
         self.view.addSubview(self.textField)
         self.textField.translatesAutoresizingMaskIntoConstraints = false
-
         self.textField.topAnchor.constraint(equalTo: self.playerNameLabel.bottomAnchor).isActive = true
         self.textField.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        self.textField.pinLeftRight(to: self.view, offset: self.offsets)
+        self.textField.pinLeftRight(to: self.view, offset: PlayerNameViewController.offsets)
         self.textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     }
     
@@ -78,30 +82,22 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
         button.layer.cornerRadius = 10
         self.view.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.pinLeftRight(to: self.view, offset: self.offsets)
+        button.pinLeftRight(to: self.view, offset: PlayerNameViewController.offsets)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 5).isActive = true
         button.addTarget(self, action: #selector(self.okButtonClicked(_:)), for: .touchUpInside)
     }
     
     @objc func okButtonClicked(_ sender:UIButton!) {
-        let newViewController = GameViewController(playerName: self.playerName)
+        let name = self.textField.text ?? PlayerNameViewController.defaultName
+        let newViewController = GameViewController(playerName: name)
         self.navigationController?.present(newViewController, animated: true)
         self.navigationController?.popViewController(animated: false)
 
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard case self.playerName = textField.text else {
-            self.playerName = "Dragon Slayer"
-            return
-        }
-    }
-
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder();
         return false
     }
-
 }
