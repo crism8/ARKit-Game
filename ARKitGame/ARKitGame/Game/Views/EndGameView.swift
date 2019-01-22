@@ -24,7 +24,7 @@ class EndGameView: UIView {
         self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.isHidden = true
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.addDragonImage()
+        self.addTopBarView()
         self.scoreTextLabel = self.prepareScoreLabel()//self.praparePauseViewButton(title: "resumeButton")
         self.scoreView = self.prepareScoreView()
         self.restartButton = self.praparePauseViewButton(title: "restartButton")
@@ -36,12 +36,21 @@ class EndGameView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addDragonImage() {
-        let image = UIImage(named: "pauseDragon")
-        let dragonIV = UIImageView(image: image)
-        self.addSubview(dragonIV)
-        dragonIV.translatesAutoresizingMaskIntoConstraints = false
-        dragonIV.centerXY(to: self)
+    func addTopBarView() {
+        let tBV = UIView()
+        tBV.backgroundColor = .black
+        self.addSubview(tBV)
+        tBV.translatesAutoresizingMaskIntoConstraints = false
+        tBV.pinTopLeftRight(to: self)
+        tBV.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.text = "DRAGON SHOOTER"
+        l.font = UIFont(name: "Baskerville-Bold ", size: 50.0)
+        l.textColor = .white
+        tBV.addSubview(l)
+        l.textAlignment = .center
+        l.pinAllEdges(to: tBV)
     }
     
     func prepareScoreLabel() -> UILabel {
@@ -102,9 +111,7 @@ class EndGameView: UIView {
         pauseButton.translatesAutoresizingMaskIntoConstraints = false
         pauseButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         pauseButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        //playButton.titleEdgeInsets = UIEdgeInsets(top: -10,left: -10,bottom: -10,right: -10)
-        // playButton.contentEdgeInsets = UIEdgeInsets(top: 5,left: 5,bottom: 5,right: 5)
+
         
         return pauseButton
     }

@@ -21,6 +21,7 @@ class LeaderboardTableViewCell: UITableViewCell {
     var positionLabel : UILabel = {
         var l = UILabel()
         l.font = UIFont.systemFont(ofSize: 20)
+        l.textColor = .white
         l.textAlignment = .center
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
@@ -28,6 +29,7 @@ class LeaderboardTableViewCell: UITableViewCell {
     
     var nameLabel : UILabel = {
         var l = UILabel()
+        l.textColor = .white
         l.font = UIFont.systemFont(ofSize: 20)
         l.textAlignment = .center
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -36,6 +38,7 @@ class LeaderboardTableViewCell: UITableViewCell {
     
     var scoreLabel : UILabel = {
         var l = UILabel()
+        l.textColor = .white
         l.font = UIFont.systemFont(ofSize: 20)
         l.textAlignment = .center
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +49,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.prepareContentView()
+        self.isUserInteractionEnabled = false
     }
     
     func prepareContentView() {

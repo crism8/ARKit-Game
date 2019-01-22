@@ -18,9 +18,6 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         super.init(nibName: nil, bundle: nil)
         self.LeaderboardModel = leaderboard
         self.sortModel()
-        for item in LeaderboardModel {
-            print(item.username, ":::", item.score)
-        }
     }
     
     func sortModel() {
@@ -38,7 +35,6 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         self.prepareBackground()
         self.prepareTableView()
     }
-    
 
     func prepareBackground() {
         let image = UIImage(named: "dragon6")
@@ -58,7 +54,8 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
 
         self.view.addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView.pinAllEdges(to: self.view)
+        self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50.0).isActive = true
+        self.tableView.pinBottomLeftRight(to: self.view)//pinAllEdges(to: self.view)
         self.tableView.backgroundColor = .clear
         self.tableView.isScrollEnabled = false
     }

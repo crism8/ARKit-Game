@@ -21,9 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainViewController = MainMenuViewController()
         self.navViewController = UINavigationController(rootViewController: mainViewController)
         window?.rootViewController = self.navViewController
-      //  self.navViewController?.navigationBar.backgroundColor = .clear
-       // self.navViewController?.navigationBar.barTintColor = .clear
-       // self.navViewController?.navigationBar.tintColor = .clear
+
         self.navViewController?.navigationBar.shadowImage = UIImage()
         self.navViewController?.navigationBar.isTranslucent = true
         self.navViewController?.navigationBar.setBackgroundImage(UIImage(), for: .default)

@@ -87,7 +87,6 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func okButtonClicked(_ sender:UIButton!) {
-        print("ok Button Clicked")
         let newViewController = GameViewController(playerName: self.playerName)
         self.navigationController?.present(newViewController, animated: true)
         self.navigationController?.popViewController(animated: false)
@@ -95,11 +94,7 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
-        print("TextField did end editing method called")
         guard case self.playerName = textField.text else {
-            print("textField.text else")
-
             self.playerName = "Dragon Slayer"
             return
         }
@@ -107,12 +102,7 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
 
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // called when 'return' key pressed. return NO to ignore.
-        print("TextField should return method called")
-        // may be useful: textField.resignFirstResponder()
-       // self.playerName = textField.text!
         textField.resignFirstResponder();
-
         return false
     }
 

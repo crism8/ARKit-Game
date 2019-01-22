@@ -21,7 +21,7 @@ class GameView: UIView {
     var pauseButton: UIButton!
 
     override init(frame: CGRect) {
-        super.init(frame: frame)//(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        super.init(frame: frame)
         self.addSceneView()
         self.addGunSight()
         self.addScoreCounter()

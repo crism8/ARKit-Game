@@ -9,21 +9,15 @@
 /* Begin PBXBuildFile section */
 		0E501CC488C40B8A66DC6B73 /* Pods_ARKitGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1096DE03FC014C728D4716 /* Pods_ARKitGame.framework */; };
 		F301FFD221D9CB480020C1F6 /* UIView+PinEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301FFD121D9CB480020C1F6 /* UIView+PinEdges.swift */; };
-		F301FFD421DAA0B00020C1F6 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */; };
+		F301FFD421DAA0B00020C1F6 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301FFD321DAA0B00020C1F6 /* CreditsViewController.swift */; };
 		F3205A4A21B2121C0021336A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F3205A4921B2121C0021336A /* Localizable.strings */; };
-		F335D56A21E54FD4000B8ABF /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D56921E54FD4000B8ABF /* LeaderboardTableViewController.swift */; };
 		F335D56D21E55E46000B8ABF /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D56C21E55E46000B8ABF /* LeaderboardTableViewCell.swift */; };
 		F335D57221E655B6000B8ABF /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D57121E655B6000B8ABF /* FirebaseServices.swift */; };
-		F335D57521E68FCE000B8ABF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D57421E68FCE000B8ABF /* Observable.swift */; };
-		F335D57721E6956B000B8ABF /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D57621E6956B000B8ABF /* GameViewModel.swift */; };
-		F335D57B21E6C78F000B8ABF /* ActionMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F335D57A21E6C78F000B8ABF /* ActionMaker.swift */; };
 		F33A2A3521E811A1001004E0 /* PausedGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33A2A3421E811A1001004E0 /* PausedGameView.swift */; };
 		F353685B21F15BF600AF68E2 /* PlayerNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353685A21F15BF600AF68E2 /* PlayerNameViewController.swift */; };
 		F353687921F3FD4E00AF68E2 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353687821F3FD4E00AF68E2 /* LeaderboardViewController.swift */; };
 		F353688721F5446E00AF68E2 /* EndGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353688621F5446E00AF68E2 /* EndGameView.swift */; };
 		F3570C4021E40E1000EEDE9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */; };
-		F359AEB421EBF87C00EE96BD /* Dragon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359AEB321EBF87C00EE96BD /* Dragon.swift */; };
-		F359AEB621EBFD7A00EE96BD /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359AEB521EBFD7A00EE96BD /* GameModel.swift */; };
 		F359AEBA21EC023A00EE96BD /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F359AEB921EC023A00EE96BD /* GameView.swift */; };
 		F3692E022187C3AD000B0C9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3692E012187C3AD000B0C9F /* AppDelegate.swift */; };
 		F3692E042187C3AD000B0C9F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F3692E032187C3AD000B0C9F /* art.scnassets */; };
@@ -38,21 +32,15 @@
 		CE1096DE03FC014C728D4716 /* Pods_ARKitGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARKitGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9325FF475E84E9B0D85945 /* Pods-ARKitGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARKitGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARKitGame/Pods-ARKitGame.debug.xcconfig"; sourceTree = "<group>"; };
 		F301FFD121D9CB480020C1F6 /* UIView+PinEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PinEdges.swift"; sourceTree = "<group>"; };
-		F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		F301FFD321DAA0B00020C1F6 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		F3205A4921B2121C0021336A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		F335D56921E54FD4000B8ABF /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		F335D56C21E55E46000B8ABF /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		F335D57121E655B6000B8ABF /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
-		F335D57421E68FCE000B8ABF /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		F335D57621E6956B000B8ABF /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
-		F335D57A21E6C78F000B8ABF /* ActionMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMaker.swift; sourceTree = "<group>"; };
 		F33A2A3421E811A1001004E0 /* PausedGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PausedGameView.swift; sourceTree = "<group>"; };
 		F353685A21F15BF600AF68E2 /* PlayerNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNameViewController.swift; sourceTree = "<group>"; };
 		F353687821F3FD4E00AF68E2 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		F353688621F5446E00AF68E2 /* EndGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameView.swift; sourceTree = "<group>"; };
 		F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F359AEB321EBF87C00EE96BD /* Dragon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragon.swift; sourceTree = "<group>"; };
-		F359AEB521EBFD7A00EE96BD /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		F359AEB921EC023A00EE96BD /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		F3692DFE2187C3AD000B0C9F /* ARKitGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3692E012187C3AD000B0C9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				F301FFD121D9CB480020C1F6 /* UIView+PinEdges.swift */,
-				F335D57421E68FCE000B8ABF /* Observable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -105,7 +92,6 @@
 		F335D56B21E55D2A000B8ABF /* Leaderboard */ = {
 			isa = PBXGroup;
 			children = (
-				F335D56921E54FD4000B8ABF /* LeaderboardTableViewController.swift */,
 				F335D56C21E55E46000B8ABF /* LeaderboardTableViewCell.swift */,
 				F353687821F3FD4E00AF68E2 /* LeaderboardViewController.swift */,
 			);
@@ -115,32 +101,28 @@
 		F335D57321E68ED3000B8ABF /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				F359AEB721EC00C600EE96BD /* Pause */,
+				F359AEB721EC00C600EE96BD /* Views */,
 				F3692E052187C3AD000B0C9F /* GameViewController.swift */,
-				F359AEB921EC023A00EE96BD /* GameView.swift */,
-				F335D57621E6956B000B8ABF /* GameViewModel.swift */,
-				F335D57A21E6C78F000B8ABF /* ActionMaker.swift */,
-				F359AEB321EBF87C00EE96BD /* Dragon.swift */,
-				F359AEB521EBFD7A00EE96BD /* GameModel.swift */,
 				F353685A21F15BF600AF68E2 /* PlayerNameViewController.swift */,
-				F353688621F5446E00AF68E2 /* EndGameView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
 		};
-		F359AEB721EC00C600EE96BD /* Pause */ = {
+		F359AEB721EC00C600EE96BD /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F33A2A3421E811A1001004E0 /* PausedGameView.swift */,
+				F359AEB921EC023A00EE96BD /* GameView.swift */,
+				F353688621F5446E00AF68E2 /* EndGameView.swift */,
 			);
-			path = Pause;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F359AEB821EC00E800EE96BD /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				F3CF3A8721D719F600929C8B /* MainMenuViewController.swift */,
-				F301FFD321DAA0B00020C1F6 /* OptionsViewController.swift */,
+				F301FFD321DAA0B00020C1F6 /* CreditsViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -166,20 +148,28 @@
 		F3692E002187C3AD000B0C9F /* ARKitGame */ = {
 			isa = PBXGroup;
 			children = (
+				F3DA1F1921F69CB4007A516A /* Others */,
 				F359AEB821EC00E800EE96BD /* Menu */,
 				F335D57321E68ED3000B8ABF /* Game */,
 				F335D56B21E55D2A000B8ABF /* Leaderboard */,
 				F301FFD021D9CA950020C1F6 /* Helpers */,
-				F3692E0F2187C3AE000B0C9F /* Info.plist */,
-				F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */,
 				F3692E032187C3AD000B0C9F /* art.scnassets */,
-				F3205A4921B2121C0021336A /* Localizable.strings */,
+				F3692E0F2187C3AE000B0C9F /* Info.plist */,
 				F3692E012187C3AD000B0C9F /* AppDelegate.swift */,
 				F3692E0A2187C3AE000B0C9F /* Assets.xcassets */,
 				F3692E0C2187C3AE000B0C9F /* LaunchScreen.storyboard */,
 				F335D57121E655B6000B8ABF /* FirebaseServices.swift */,
 			);
 			path = ARKitGame;
+			sourceTree = "<group>";
+		};
+		F3DA1F1921F69CB4007A516A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				F3570C3F21E40E1000EEDE9D /* GoogleService-Info.plist */,
+				F3205A4921B2121C0021336A /* Localizable.strings */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,21 +300,15 @@
 			files = (
 				F3CF3A8821D719F600929C8B /* MainMenuViewController.swift in Sources */,
 				F3692E062187C3AD000B0C9F /* GameViewController.swift in Sources */,
-				F335D57B21E6C78F000B8ABF /* ActionMaker.swift in Sources */,
 				F33A2A3521E811A1001004E0 /* PausedGameView.swift in Sources */,
 				F359AEBA21EC023A00EE96BD /* GameView.swift in Sources */,
 				F3692E022187C3AD000B0C9F /* AppDelegate.swift in Sources */,
 				F353685B21F15BF600AF68E2 /* PlayerNameViewController.swift in Sources */,
-				F359AEB621EBFD7A00EE96BD /* GameModel.swift in Sources */,
 				F301FFD221D9CB480020C1F6 /* UIView+PinEdges.swift in Sources */,
-				F335D57521E68FCE000B8ABF /* Observable.swift in Sources */,
 				F353688721F5446E00AF68E2 /* EndGameView.swift in Sources */,
-				F359AEB421EBF87C00EE96BD /* Dragon.swift in Sources */,
 				F353687921F3FD4E00AF68E2 /* LeaderboardViewController.swift in Sources */,
-				F335D56A21E54FD4000B8ABF /* LeaderboardTableViewController.swift in Sources */,
-				F301FFD421DAA0B00020C1F6 /* OptionsViewController.swift in Sources */,
+				F301FFD421DAA0B00020C1F6 /* CreditsViewController.swift in Sources */,
 				F335D57221E655B6000B8ABF /* FirebaseServices.swift in Sources */,
-				F335D57721E6956B000B8ABF /* GameViewModel.swift in Sources */,
 				F335D56D21E55E46000B8ABF /* LeaderboardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

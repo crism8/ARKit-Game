@@ -9,7 +9,7 @@
 
 "DragonButton" = "Show Dragons";
 "playButton" = "Play";
-"optionsButton" = "Options";
+"creditsButton" = "Credits";
 "leaderboardButton" = "Leaderboard";
 "startButton" = "Start";
 "resumeButton" = "Resume";

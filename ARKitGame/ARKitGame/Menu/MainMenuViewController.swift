@@ -10,9 +10,9 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
     
-    let buttonsNamesArray = ["playButton", "optionsButton", "leaderboardButton"]
+    let buttonsNamesArray = ["playButton", "creditsButton", "leaderboardButton"]
     var playButton = UIButton()
-    var optionsButton = UIButton()
+    var creditsButton = UIButton()
     var leaderboardButton = UIButton()
     let firebase = FirebaseServices.init()
     let buttonsWidth: CGFloat = 200.0
@@ -22,7 +22,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBackground()
-        var buttonsDict:[String: UIButton] = ["playButton": self.playButton, "optionsButton": self.optionsButton, "leaderboardButton": self.leaderboardButton ]
+        var buttonsDict:[String: UIButton] = ["playButton": self.playButton, "creditsButton": self.creditsButton, "leaderboardButton": self.leaderboardButton ]
         var buttonsArray:[UIButton] = []
         for buttonName in buttonsNamesArray {
             self.prapareMenuButton(title: buttonName, menuButton: buttonsDict[buttonName]!)
@@ -30,6 +30,10 @@ class MainMenuViewController: UIViewController {
         }
         self.addTargetsForButtons()
         self.addStackView(butt: buttonsArray)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         firebase.getLeaderBoard()
     }
     
@@ -55,7 +59,6 @@ class MainMenuViewController: UIViewController {
     }
     
     func prapareMenuButton(title: String, menuButton: UIButton) {
-        //let menuButton = UIButton(type: .roundedRect)
         menuButton.setTitle(NSLocalizedString(title, comment: "MenuButton"), for: .normal)
         menuButton.titleLabel?.font = UIFont(name: "Baskerville-Bold ", size: 25.0)
         menuButton.setTitleColor(.white, for: .normal)
@@ -68,33 +71,25 @@ class MainMenuViewController: UIViewController {
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         menuButton.heightAnchor.constraint(equalToConstant: self.buttonsHeight).isActive = true
         menuButton.widthAnchor.constraint(equalToConstant: self.buttonsWidth).isActive = true
-        
-        //playButton.titleEdgeInsets = UIEdgeInsets(top: -10,left: -10,bottom: -10,right: -10)
-        // playButton.contentEdgeInsets = UIEdgeInsets(top: 5,left: 5,bottom: 5,right: 5)
-
-     //   return menuButton
     }
     
     func addTargetsForButtons() {
         self.playButton.addTarget(self, action: #selector(self.playButtonClicked(_:)), for: .touchUpInside)
-        self.optionsButton.addTarget(self, action: #selector(self.optionsButtonClicked(_:)), for: .touchUpInside)
+        self.creditsButton.addTarget(self, action: #selector(self.optionsButtonClicked(_:)), for: .touchUpInside)
         self.leaderboardButton.addTarget(self, action: #selector(self.leaderboardButtonClicked(_:)), for: .touchUpInside)
     }
     
     @objc func playButtonClicked(_ sender:UIButton!) {
-        print("play Button Clicked")
         let newViewController = PlayerNameViewController()//GameViewController()
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     @objc func optionsButtonClicked(_ sender:UIButton!) {
-        print("options Button Clicked")
-        let newViewController = OptionsViewController()
+        let newViewController = CreditsViewController()
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     @objc func leaderboardButtonClicked(_ sender:UIButton!) {
-        print("leaderboard Button Clicked")
         let newViewController = LeaderboardViewController(leaderboard: firebase.scoreData)
         self.navigationController?.pushViewController(newViewController, animated: true)
     }

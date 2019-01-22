@@ -23,22 +23,21 @@ class FirebaseServices: NSObject {
         self.leaderboardDatabaseReference = Database.database().reference(withPath: "Leaderboard")
     }
     
-    func sendScore() {
-        let dict = ["playerName": "Cris", "score": 133] as! [String : Int]
+    func sendScore(dict:NSDictionary) {
         self.leaderboardDatabaseReference?.childByAutoId().setValue(dict)
     }
+    
     func getLeaderBoard() {
         self.leaderboardDatabaseReference?.observeSingleEvent(of: .value, with: { (snapshot) in
             if let snapshotValue = snapshot.value as? [String:NSDictionary] {
+                var tempScoreData = [LeadScore]()
                 for snapDict in snapshotValue {
                 let name = snapDict.value["playerName"] as! String
-                let score = snapDict.value["score"] as! Int
-                let lS = LeadScore(username: name, score: score)
-                    
-                print(name, score)
-                self.scoreData.append(lS)
-
+                let score = snapDict.value["score"] as! String
+                let lS = LeadScore(username: name, score: Int(score)!)
+                tempScoreData.append(lS)
                 }
+                self.scoreData = tempScoreData
             }
         }){ (error) in
             print(error.localizedDescription)
