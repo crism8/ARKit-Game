@@ -214,14 +214,18 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     }
     
     func animateHard() -> SCNAction {
-        let move1 = SCNAction.moveBy(x: 2, y: 2, z: 0, duration: 0.5)
-        move1.timingMode = .easeInEaseOut;
-        let move2 = SCNAction.moveBy(x: -2, y: -2, z: 0, duration: 0.5)
-        move2.timingMode = .easeInEaseOut;
-        let moveSequence = SCNAction.sequence([move1,move2])
+        var moves = Array<SCNAction>()
+        for _ in 0...5 {
+        let cgf =  CGFloat.random(in: 1.0 ... 4.0)
+        let move = SCNAction.moveBy(x: cgf, y: cgf, z: 0, duration: 0.5)
+        moves.append(move)
+        }
+      
+        let moveSequence = SCNAction.sequence(moves)
         let moveLoop = SCNAction.repeatForever(moveSequence)
         return moveLoop
     }
+
     
     // Mark: Setting Targets
     func setTargetsForButtons() {
