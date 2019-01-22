@@ -102,6 +102,7 @@ class GameView: UIView {
         button.widthAnchor.constraint(equalToConstant: 50).isActive = true
         button.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
         button.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        button.isHidden = true
         self.pauseButton = button
     }
     

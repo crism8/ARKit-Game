@@ -33,7 +33,7 @@ class PausedGameView: UIView {
     
     func addTopBarView() {
         let tBV = UIView()
-        tBV.backgroundColor = .black
+        tBV.backgroundColor = UIColor(red: 0.55, green: 0.78, blue: 0.93, alpha: 1.0)
         self.addSubview(tBV)
         tBV.translatesAutoresizingMaskIntoConstraints = false
         tBV.pinTopLeftRight(to: self)
@@ -41,7 +41,7 @@ class PausedGameView: UIView {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.text = "DRAGON SHOOTER"
-        l.font = UIFont.systemFont(ofSize: 50.0)///UIFont(name: "Baskerville-Bold ", size: 50.0)
+        l.font = UIFont.systemFont(ofSize: 30.0)
         l.textColor = .white
         l.textAlignment = .center
         tBV.addSubview(l)
@@ -51,7 +51,7 @@ class PausedGameView: UIView {
     func praparePauseViewButton(title: String) -> UIButton {
         let pauseButton = UIButton(type: .roundedRect)
         pauseButton.setTitle(NSLocalizedString(title, comment: "PauseButton"), for: .normal)
-        pauseButton.titleLabel?.font = UIFont(name: "Baskerville-Bold ", size: 25.0)
+        pauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 25.0)
         pauseButton.setTitleColor(.white, for: .normal)
         pauseButton.setTitleColor(.gray, for: .selected)
         

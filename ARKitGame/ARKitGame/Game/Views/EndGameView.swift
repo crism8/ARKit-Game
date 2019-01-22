@@ -25,10 +25,10 @@ class EndGameView: UIView {
         self.isHidden = true
         self.translatesAutoresizingMaskIntoConstraints = false
         self.addTopBarView()
-        self.scoreTextLabel = self.prepareScoreLabel()//self.praparePauseViewButton(title: "resumeButton")
+        self.scoreTextLabel = self.prepareScoreLabel()
         self.scoreView = self.prepareScoreView()
-        self.restartButton = self.praparePauseViewButton(title: "restartButton")
-        self.quitButton = self.praparePauseViewButton(title: "quitButton")
+        self.restartButton = self.prapareEndViewButton(title: "restartButton")
+        self.quitButton = self.prapareEndViewButton(title: "quitButton")
         self.addStackView()
     }
     
@@ -38,7 +38,7 @@ class EndGameView: UIView {
     
     func addTopBarView() {
         let tBV = UIView()
-        tBV.backgroundColor = .black
+        tBV.backgroundColor = UIColor(red: 0.55, green: 0.78, blue: 0.93, alpha: 1.0)
         self.addSubview(tBV)
         tBV.translatesAutoresizingMaskIntoConstraints = false
         tBV.pinTopLeftRight(to: self)
@@ -46,7 +46,7 @@ class EndGameView: UIView {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.text = "DRAGON SHOOTER"
-        l.font = UIFont(name: "Baskerville-Bold ", size: 50.0)
+        l.font = UIFont.systemFont(ofSize: 30)
         l.textColor = .white
         tBV.addSubview(l)
         l.textAlignment = .center
@@ -56,7 +56,7 @@ class EndGameView: UIView {
     func prepareScoreLabel() -> UILabel {
         let l = UILabel()
         l.text = "SCORE"
-        l.font = UIFont(name: "Baskerville-Bold ", size: 25.0)
+        l.font = UIFont.systemFont(ofSize: 25.0)
         l.textAlignment = .center
         l.textColor = .white
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +72,7 @@ class EndGameView: UIView {
         v.widthAnchor.constraint(equalToConstant: 200).isActive = true
         let playerNameL = UILabel()
         playerNameL.text = ""
-        playerNameL.font = UIFont(name: "Baskerville-Bold ", size: 25.0)
+        playerNameL.font = UIFont.systemFont(ofSize: 25.0)
         playerNameL.textAlignment = .center
         playerNameL.textColor = .white
         playerNameL.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +80,7 @@ class EndGameView: UIView {
         
         let playerScoreL = UILabel()
         playerScoreL.text = ""
-        playerScoreL.font = UIFont(name: "Baskerville-Bold ", size: 25.0)
+        playerScoreL.font = UIFont.systemFont(ofSize: 25.0)
         playerScoreL.textAlignment = .center
         playerScoreL.textColor = .white
         playerScoreL.translatesAutoresizingMaskIntoConstraints = false
@@ -97,23 +97,23 @@ class EndGameView: UIView {
         return v
     }
     
-    func praparePauseViewButton(title: String) -> UIButton {
-        let pauseButton = UIButton(type: .roundedRect)
-        pauseButton.setTitle(NSLocalizedString(title, comment: "PauseButton"), for: .normal)
-        pauseButton.titleLabel?.font = UIFont(name: "Baskerville-Bold ", size: 25.0)
-        pauseButton.setTitleColor(.white, for: .normal)
-        pauseButton.setTitleColor(.gray, for: .selected)
+    func prapareEndViewButton(title: String) -> UIButton {
+        let endButton = UIButton(type: .roundedRect)
+        endButton.setTitle(NSLocalizedString(title, comment: "endButton"), for: .normal)
+        endButton.titleLabel?.font = UIFont.systemFont(ofSize: 25.0)
+        endButton.setTitleColor(.white, for: .normal)
+        endButton.setTitleColor(.gray, for: .selected)
         
-        pauseButton.backgroundColor = UIColor(red: 0.55, green: 0.78, blue: 0.93, alpha: 1.0)
-        pauseButton.tintColor = UIColor(red: 0.25, green: 0.47, blue: 0.61, alpha: 1.0)
+        endButton.backgroundColor = UIColor(red: 0.55, green: 0.78, blue: 0.93, alpha: 1.0)
+        endButton.tintColor = UIColor(red: 0.25, green: 0.47, blue: 0.61, alpha: 1.0)
         
-        pauseButton.layer.cornerRadius = 10
-        pauseButton.translatesAutoresizingMaskIntoConstraints = false
-        pauseButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        pauseButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        endButton.layer.cornerRadius = 10
+        endButton.translatesAutoresizingMaskIntoConstraints = false
+        endButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        endButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
         
-        return pauseButton
+        return endButton
     }
     
     func addStackView()  {

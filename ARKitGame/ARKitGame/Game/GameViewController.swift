@@ -32,7 +32,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     let endGameView = EndGameView()
 
     var timer = Timer()
-    var gameTime = 20.0
+    var gameTime = 45.0
     
     init(playerName: String) {
         self.power = 30
@@ -47,6 +47,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = gameView
+        self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)
         self.setupPauseView()
         self.setTargetsForButtons()
         self.setupEndGameView()
@@ -240,7 +241,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         self.addNoEyedDragon(position: vector)
         self.gameView.startButton.removeFromSuperview()
         self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
-        
+        self.gameView.pauseButton.isHidden = false
     }
     
     @objc func updateTimer() {
@@ -258,6 +259,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         self.endGameView.playerNameLabel.text = self.playerName
         self.endGameView.scoreLabel.text = String(score)
         self.endGameView.isHidden = false
+        self.gameView.gunSight.isHidden = true
         self.sendScoreToFirebase()
     }
     
@@ -278,6 +280,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     }
     
     @objc func restartButtonClicked(_ sender:UIButton!) {
+        self.gameView.gunSight.isHidden = false
         self.pauseView.isHidden = true
         self.gameTime = 60
         self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)

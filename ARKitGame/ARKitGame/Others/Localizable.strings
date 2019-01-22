@@ -16,8 +16,10 @@
 "restartButton" = "Restart";
 "quitButton" = "Quit";
 "playerNameLabel" = "Player Name:";
+"scoreLabel" = "SCORE";
 "OK" = "OK";
-
+"DragonCredit" = "No Eyed Dragon V2 3D textModel is made by Dominic Kett (Dommk / BlackSonicShadow)";
+"FreepikCredit" = "Background images and icons are made by freepik.com";
 
 
 

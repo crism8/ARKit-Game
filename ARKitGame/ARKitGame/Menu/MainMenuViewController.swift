@@ -60,7 +60,7 @@ class MainMenuViewController: UIViewController {
     
     func prapareMenuButton(title: String, menuButton: UIButton) {
         menuButton.setTitle(NSLocalizedString(title, comment: "MenuButton"), for: .normal)
-        menuButton.titleLabel?.font = UIFont(name: "Baskerville-Bold ", size: 25.0)
+        menuButton.titleLabel?.font = UIFont.systemFont(ofSize: 25.0)
         menuButton.setTitleColor(.white, for: .normal)
         menuButton.setTitleColor(.gray, for: .selected)
 
