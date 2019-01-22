@@ -80,7 +80,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // Pause the view's session
         self.gameView.sceneView.session.pause()
         self.pauseView.isHidden = false
     }
@@ -90,8 +89,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         guard let pointOfView = sceneView.pointOfView else {return}
         let transform = pointOfView.transform
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-    //    let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-        let position = self.calculatePlayerPosition()//orientation + location
+        let position = self.calculatePlayerPosition()
         let bullet = SCNNode(geometry: SCNSphere(radius: 0.1))
         bullet.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         bullet.position = position

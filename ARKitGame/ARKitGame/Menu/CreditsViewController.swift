@@ -17,7 +17,6 @@ class CreditsViewController: UIViewController {
         self.addBackground()
         self.dragonCreditLabel = self.addCreditLabel(title: "DragonCredit")
         self.freePikCreditLabel = self.addCreditLabel(title: "FreepikCredit")
-      //  self.viewWillLayoutSubviews()
     }
     
     func addBackground() {
@@ -38,7 +37,6 @@ class CreditsViewController: UIViewController {
         l.text = NSLocalizedString(title, comment: "CreditLabel")
         l.textColor = .white
         l.font = UIFont.systemFont(ofSize: 20)
-      //  l.textAlignment = .natural
         self.view.addSubview(l)
         return l
     }

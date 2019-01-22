@@ -50,12 +50,11 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.register(LeaderboardTableViewCell.self, forCellReuseIdentifier: LeaderboardTableViewCell.cellIdentifier())
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        // self.tableView.separatorStyle = .none
 
         self.view.addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50.0).isActive = true
-        self.tableView.pinBottomLeftRight(to: self.view)//pinAllEdges(to: self.view)
+        self.tableView.pinBottomLeftRight(to: self.view)
         self.tableView.backgroundColor = .clear
         self.tableView.isScrollEnabled = false
     }

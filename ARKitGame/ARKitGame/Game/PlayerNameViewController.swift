@@ -59,7 +59,6 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
         self.textField.clearButtonMode = UITextField.ViewMode.whileEditing
         self.textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         self.textField.delegate = self
-      // self.textField.backgroundColor = .clear
         self.view.addSubview(self.textField)
         self.textField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -72,7 +71,6 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     func addOkButton() {
         let button = UIButton(type: .custom)
         button.setTitle(NSLocalizedString("OK", comment: "Button"), for: .normal)
-        //startButton.addTarget(self, action: #selector(self.trexButtonClicked(_:)), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.gray, for: .selected)
         button.backgroundColor = UIColor(red: 0.55, green: 0.78, blue: 0.93, alpha: 1.0)
