@@ -80,7 +80,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @objc func playButtonClicked(_ sender:UIButton!) {
-        let newViewController = PlayerNameViewController()//GameViewController()
+        let newViewController = PlayerNameViewController()
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
