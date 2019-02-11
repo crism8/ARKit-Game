@@ -16,13 +16,28 @@ enum BitMaskCategory: Int {
 
 class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
     let configuration = ARWorldTrackingConfiguration()
+    
     let easyScoreLimit = 5
     let mediumScoreLimit = 10
     let hardScoreLimit = 20
+    
+    let bulletRadius: CGFloat = 0.1
+    let bulletLifeTime = 2.0
+    
+    let firstDragonZPostion: Float = 3.0
+    let nextDragonZPosition: ClosedRange<Float> = 3.0 ... 5.0
+    let nextDragonXPosition: ClosedRange<Float> = -5.0...5
+    let nextDragonYPosition: ClosedRange<Float> = -5.0...5
+    let dragonSceneName = "art.scnassets/No_Eyed_Dragon.scn"
+    let dragonNodeName = "No_Eyed_Dragon"
+    
+    let effectsArray = ["art.scnassets/Smoke.scnp", "art.scnassets/Bokeh.scnp", "art.scnassets/Fire.scnp", "art.scnassets/Reactor.scnp", "art.scnassets/Confetti.scnp"]
+    let effectsParticleLifeSpan: CGFloat = 4.0
+    let effectRadius: CGFloat = 1.0
 
-    let efectsArray = ["art.scnassets/Smoke.scnp", "art.scnassets/Bokeh.scnp", "art.scnassets/Fire.scnp", "art.scnassets/Reactor.scnp", "art.scnassets/Confetti.scnp"]
-    var power: Float
-    var Target: SCNNode?
+    let bonusTime = 3.0
+    let power: Float = 30.0
+    var targetNode: SCNNode?
     var score: Int = 0
     var dragonNode: SCNNode?
     var playerName: String
@@ -32,11 +47,12 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     let endGameView = EndGameView()
 
     var timer = Timer()
-    var gameTime = 45.0
+    let startGameTime = 45.0
+    var currentGameTime: Double
     
     init(playerName: String) {
-        self.power = 30
         self.playerName = playerName
+        self.currentGameTime = self.startGameTime
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -47,7 +63,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = gameView
-        self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)
+        self.gameView.timeLabel.text = String(format: "%.1f", self.currentGameTime)
         self.setupPauseView()
         self.setTargetsForButtons()
         self.setupEndGameView()
@@ -88,18 +104,18 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         let transform = pointOfView.transform
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
         let position = self.calculatePlayerPosition()
-        let bullet = SCNNode(geometry: SCNSphere(radius: 0.1))
+        let bullet = SCNNode(geometry: SCNSphere(radius: self.bulletRadius))
         bullet.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         bullet.position = position
         let body = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: bullet, options: nil))
         body.isAffectedByGravity = true
         bullet.physicsBody = body
-        bullet.physicsBody?.applyForce(SCNVector3(orientation.x*power, orientation.y*power, orientation.z*power), asImpulse: true)
+        bullet.physicsBody?.applyForce(SCNVector3(orientation.x*self.power, orientation.y*self.power, orientation.z*self.power), asImpulse: true)
         bullet.physicsBody?.categoryBitMask = BitMaskCategory.bullet.rawValue
         bullet.physicsBody?.contactTestBitMask = BitMaskCategory.target.rawValue
         self.gameView.sceneView.scene.rootNode.addChildNode(bullet)
         bullet.runAction(
-            SCNAction.sequence([SCNAction.wait(duration: 2.0),
+            SCNAction.sequence([SCNAction.wait(duration: self.bulletLifeTime),
                                 SCNAction.removeFromParentNode()])
         )
     }
@@ -113,22 +129,22 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     
     func calculateFirstDragonPosition() -> SCNVector3 {
         var position = self.calculatePlayerPosition()
-        position.z -= 3
+        position.z -= self.firstDragonZPostion
         return position
     }
     
     func calculateDragonPosition() -> SCNVector3 {
         var position = self.calculatePlayerPosition()
-        position.z -=  Float.random(in: 3.0 ... 5.0)
-        position.x -=  Float.random(in: -5.0 ... 5.0)
-        position.y -=  Float.random(in: -5.0 ... 5.0)
+        position.z -=  Float.random(in: self.nextDragonZPosition)
+        position.x -=  Float.random(in: self.nextDragonXPosition)
+        position.y -=  Float.random(in: self.nextDragonYPosition)
 
         return position
     }
     
     func addNoEyedDragon(position: SCNVector3) {
-        let dragonScene =  SCNScene(named: "art.scnassets/No_Eyed_Dragon.scn")
-        let dragonNode = (dragonScene?.rootNode.childNode(withName: "No_Eyed_Dragon", recursively: false))!
+        let dragonScene =  SCNScene(named: self.dragonSceneName)
+        let dragonNode = (dragonScene?.rootNode.childNode(withName: self.dragonNodeName, recursively: false))!
         dragonNode.position = position
         dragonNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: dragonNode, options: nil))
         dragonNode.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue
@@ -142,22 +158,22 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         let nodeB = contact.nodeB
         
         if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.target.rawValue {
-            self.Target = nodeA
+            self.targetNode = nodeA
         } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.target.rawValue {
-            self.Target = nodeB
+            self.targetNode = nodeB
         }
         
         let deadEffectNode = self.makeDeadEffect(contact: contact)
         self.gameView.sceneView.scene.rootNode.addChildNode(deadEffectNode)
-        self.Target?.removeFromParentNode()
+        self.targetNode?.removeFromParentNode()
         self.performAfterDragonDeath()
     }
     
     func makeDeadEffect(contact: SCNPhysicsContact) -> SCNNode {
-        let effect = SCNParticleSystem(named: efectsArray[Int.random(in: 0 ... efectsArray.count-1)], inDirectory: nil)
+        let effect = SCNParticleSystem(named: effectsArray[Int.random(in: 0 ... effectsArray.count-1)], inDirectory: nil)
         effect?.loops = false
-        effect?.particleLifeSpan = 4
-        effect?.emitterShape = SCNSphere(radius: 1)
+        effect?.particleLifeSpan = self.effectsParticleLifeSpan
+        effect?.emitterShape = SCNSphere(radius: self.effectRadius)
         let effectNode = SCNNode()
         effectNode.addParticleSystem(effect!)
         effectNode.position = contact.contactPoint
@@ -165,9 +181,8 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     }
     
     func performAfterDragonDeath() {
-        
         DispatchQueue.main.async {
-            self.gameTime += 3.0
+            self.currentGameTime += self.bonusTime
             self.addNoEyedDragon(position: self.calculateDragonPosition())
             self.updateScore()
             if (self.score > self.hardScoreLimit) {
@@ -247,11 +262,11 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     }
     
     @objc func updateTimer() {
-        if (self.gameTime < 0.1) {
+        if (self.currentGameTime < 0.1) {
             self.actionForGameEnd()
         } else {
-            self.gameTime -= 0.1
-            self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)
+            self.currentGameTime -= 0.1
+            self.gameView.timeLabel.text = String(format: "%.1f", self.currentGameTime)
         }
     }
     
@@ -284,8 +299,8 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     @objc func restartButtonClicked(_ sender:UIButton!) {
         self.gameView.gunSight.isHidden = false
         self.pauseView.isHidden = true
-        self.gameTime = 60
-        self.gameView.timeLabel.text = String(format: "%.1f", self.gameTime)
+        self.currentGameTime =  self.startGameTime
+        self.gameView.timeLabel.text = String(format: "%.1f", self.currentGameTime)
         self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
     }
     
